@@ -1,6 +1,7 @@
 #include "pch.h"
 #include "CTimeMgr.h"
 #include "CCore.h"
+
 CTimeMgr::CTimeMgr()
 	: m_llCurCount{}
 	, m_llFrequency{}
