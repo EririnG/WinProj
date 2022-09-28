@@ -5,8 +5,6 @@
 #include "CTimeMgr.h"
 #include "CSeneMgr.h"
 
-CObject g_obj;
-
 CCore::CCore()
 	: m_hWnd(0)
 	, m_ptResolution{}
@@ -59,7 +57,6 @@ void CCore::Progress()
 	// Manager Update
 	CTimeMgr::GetInst()->update();
 	CKeyMgr::GetInst()->update();
-
 	CSeneMgr::GetInst()->update();
 	
 	//=========
