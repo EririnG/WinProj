@@ -24,30 +24,26 @@ void CScene_Start::Enter()
 	pObj->SetScale(Vec2(100.f,100.f));
 	AddObject(pObj, GROUP_TYPE::DEFAULT);
 
-	CMonster* pMonsterobj = new CMonster;
-	pMonsterobj->SetPos(Vec2(640.f, 50.f));
-	pMonsterobj->SetCenterPos(pMonsterobj->GetPos());
-	pMonsterobj->SetScale(Vec2(50.f, 50.f));
-	AddObject(pMonsterobj, GROUP_TYPE::DEFAULT);
-	// 몬스터 배치
-	//int iMonCount = 16;
-	//float fMoveDist = 25.f;
-	//float fObjScale = 50.f;
-	//Vec2 vResolution = CCore::GetInst()->GetResolution();
-	//CMonster* pMonsterObj = nullptr;
 
-	//float fTerm = (vResolution.x - ((fMoveDist+ fObjScale/2) * 2)) / (float)(iMonCount-1);
+	 //몬스터 배치
+	int iMonCount = 16;
+	float fMoveDist = 25.f;
+	float fObjScale = 50.f;
+	Vec2 vResolution = CCore::GetInst()->GetResolution();
+	CMonster* pMonsterObj = nullptr;
 
-	//for (int i = 0; i < iMonCount; ++i)
-	//{
-	//	// Monster Object 추가
-	//	pMonsterObj = new CMonster;
-	//	pMonsterObj->SetPos(Vec2((fMoveDist + fObjScale / 2.f) + (float)i*fTerm , 50.f));
-	//	pMonsterObj->SetScale(Vec2(50.f, 50.f));
-	//	pMonsterObj->SetMoveDistance(fMoveDist);
-	//	pMonsterObj->SetCenterPos(pMonsterObj->GetPos());
-	//	AddObject(pMonsterObj, GROUP_TYPE::DEFAULT);
-	//}
+	float fTerm = (vResolution.x - ((fMoveDist+ fObjScale/2) * 2)) / (float)(iMonCount-1);
+
+	for (int i = 0; i < iMonCount; ++i)
+	{
+		// Monster Object 추가
+		pMonsterObj = new CMonster;
+		pMonsterObj->SetPos(Vec2((fMoveDist + fObjScale / 2.f) + (float)i*fTerm , 50.f));
+		pMonsterObj->SetScale(Vec2(50.f, 50.f));
+		pMonsterObj->SetMoveDistance(fMoveDist);
+		pMonsterObj->SetCenterPos(pMonsterObj->GetPos());
+		AddObject(pMonsterObj, GROUP_TYPE::DEFAULT);
+	}
 
 }
 
