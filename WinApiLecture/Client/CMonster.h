@@ -9,7 +9,7 @@ private:
 	float	m_fSpeed;
 	float	m_fMaxDistance;
 	int     m_iDir;
-	
+
 
 
 public:
@@ -18,10 +18,12 @@ public:
 	void SetMoveDistance(float _f) { m_fMaxDistance = _f; }
 	void SetCenterPos(Vec2 _vPos) { m_vCenterpos = _vPos; }
 
+public:
+	void CreateMissile();
 
 public:
 	virtual void update();
-
+	virtual void render(HDC _dc);
 public:
 	CMonster();
 	~CMonster();

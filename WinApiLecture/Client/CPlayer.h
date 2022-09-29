@@ -6,9 +6,9 @@ class CPlayer:
 {
 public:
 	virtual void update();
-
+	virtual void render(HDC _dc);
 private:
 	void CreateMissile();
-
+	void CreateMissile2();
 };
 

@@ -15,9 +15,13 @@ public:
             m_fDir = 1.f;
     }
 
+
 public:
     virtual void update();
     virtual void render(HDC _dc);
+
+public:
+    void ChangeMissile();
 
 public:
     CMissile();
