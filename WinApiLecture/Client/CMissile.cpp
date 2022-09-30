@@ -7,7 +7,7 @@
 #include "CKeyMgr.h"
 
 CMissile::CMissile()
-	: m_fDir(1.f)
+	: m_fTheta(PI/2.f)
 {
 }
 
@@ -21,19 +21,14 @@ CMissile::~CMissile()
 
 void CMissile::update()
 {
-	Vec2 vPos_Center = GetPos();
-	Vec2 vPos_Right = GetPos();
-	Vec2 vPos_Left = GetPos();
+	Vec2 vPos = GetPos();
 
-	vPos_Center.y += 600.f * fDT * m_fDir;
-	vPos_Right.y += 600.f * fDT * m_fDir;
-	vPos_Right.x += 300.f * fDT * m_fDir;
-	vPos_Left.y += 600.f * fDT * m_fDir;
-	vPos_Left.y -= 300.f * fDT * m_fDir;
+	vPos.x += 600.f * fDT * cosf(m_fTheta);
+	vPos.y -= 600.f * fDT * sinf(m_fTheta);
 
-	SetPos(vPos_Center);
-	SetPos(vPos_Right);
-	SetPos(vPos_Left);
+
+	SetPos(vPos);
+
 }
 
 void CMissile::render(HDC _dc)

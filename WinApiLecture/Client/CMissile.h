@@ -4,16 +4,11 @@ class CMissile :
     public CObject
 {
 private:
-    float     m_fDir; // 미사일 방향
+    float     m_fTheta; // 미사일 방향
 
 public:
-    void SetDir(bool _bUp)
-    {
-        if (_bUp)
-            m_fDir = -1.f;
-        else
-            m_fDir = 1.f;
-    }
+    void SetDir(float _fTheta) { m_fTheta = _fTheta; }
+
 
 
 public:
