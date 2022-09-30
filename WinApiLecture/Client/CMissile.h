@@ -6,9 +6,16 @@ class CMissile :
 private:
     float     m_fTheta; // 미사일 방향
 
+    Vec2      m_vDir;
+
 public:
     void SetDir(float _fTheta) { m_fTheta = _fTheta; }
+    void SetDir(Vec2 _vDir) 
+    { 
+        m_vDir = _vDir; 
+        m_vDir = m_vDir.Normalize();
 
+    }
 
 
 public:

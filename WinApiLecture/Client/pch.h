@@ -2,7 +2,7 @@
 
 #include <Windows.h>
 #include <stdio.h>
-
+#include <assert.h>
 
 #include <vector>
 using std::vector;
@@ -13,4 +13,3 @@ using std::wstring;
 
 #include "Define.h"
 #include "Struct.h"
-
