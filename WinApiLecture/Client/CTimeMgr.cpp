@@ -30,7 +30,10 @@ void CTimeMgr::update()
 	m_dDT = (double)(m_llCurCount.QuadPart - m_llPrevCount.QuadPart)/(double)m_llFrequency.QuadPart;
 	// 이전 카운트 값을 현재값으로 갱신(다음번 계산을 위해서)
 	m_llPrevCount = m_llCurCount;
+}
 
+void CTimeMgr::render()
+{
 	++m_iCallCount;
 	m_dACC += m_dDT;
 
@@ -41,7 +44,7 @@ void CTimeMgr::update()
 		m_iCallCount = 0;
 
 		wchar_t szBuffer[255] = {};
-		swprintf_s(szBuffer,L"FPS : %d, DT : %f", m_iFPS,m_dDT);
-		SetWindowText(CCore::GetInst()->GetMainHwnd(),szBuffer);
+		swprintf_s(szBuffer, L"FPS : %d, DT : %f", m_iFPS, m_dDT);
+		SetWindowText(CCore::GetInst()->GetMainHwnd(), szBuffer);
 	}
 }

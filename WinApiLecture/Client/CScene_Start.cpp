@@ -7,6 +7,9 @@
 
 #include "CCore.h"
 
+#include "CPathMgr.h"
+#include "CTexture.h"
+
 CScene_Start::CScene_Start()
 {
 }
@@ -18,6 +21,15 @@ CScene_Start::~CScene_Start()
 
 void CScene_Start::Enter()
 {
+	CTexture* pTex = new CTexture;
+
+	wstring strFilepath = CPathMgr::GetInst()->GetContentPath();
+	strFilepath += L"texture\\player.bmp";
+	pTex->Load(strFilepath);
+
+	delete pTex;
+
+
 	// Object Ãß°¡
 	CObject* pObj = new CPlayer;
 	pObj->SetPos(Vec2(640.f,640.f));

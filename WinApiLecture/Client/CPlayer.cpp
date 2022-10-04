@@ -5,8 +5,29 @@
 #include "CSeneMgr.h"
 #include "CKeyMgr.h"
 #include "CTimeMgr.h"
+#include "CPathMgr.h"
 
 #include "CMissile.h"
+#include "CTexture.h"
+
+CPlayer::CPlayer()
+	: m_pTex(nullptr)
+{
+	//texture ·Îµù
+	/*CTexture* m_pTex = new CTexture;
+
+	wstring strFilepath = CPathMgr::GetInst()->GetContentPath();
+	strFilepath += L"texture\\player.bmp";
+	m_pTex->Load(strFilepath);*/
+
+}
+
+CPlayer::~CPlayer()
+{
+	if (nullptr != m_pTex)
+		delete m_pTex;
+}
+
 
 void CPlayer::update()
 {
@@ -43,11 +64,27 @@ void CPlayer::update()
 
 void CPlayer::render(HDC _dc)
 {
+	int iWidth = (int)m_pTex->Width();
+	int iHeight = (int)m_pTex->Height();
+
 	Vec2 vPos = GetPos();
+
+	int(vPos.x - (float)(iWidth / 2));
+	int(vPos.y - (float)(iHeight / 2));
+
+	BitBlt(_dc,
+		int(vPos.x - (float)(iWidth / 2)),
+		int(vPos.y - (float)(iHeight / 2)),
+		iHeight,
+		iWidth,
+		m_pTex->GetDC(),
+		0, 0, SRCCOPY);
+
+	/*Vec2 vPos = GetPos();
 	Vec2 VScale = GetScale();
 
 	Rectangle(_dc, (int)(vPos.x - VScale.x / 2.f), (int)(vPos.y - VScale.y / 2.f)
-		, (int)(vPos.x + VScale.x / 2.f), (int)(vPos.y + VScale.y / 2.f));
+		, (int)(vPos.x + VScale.x / 2.f), (int)(vPos.y + VScale.y / 2.f));*/
 
 }
 
@@ -92,3 +129,5 @@ void CPlayer::CreateMissile2()
 	pCurScene->AddObject(pLEFT_Missile, GROUP_TYPE::DEFAULT);
 
 }
+
+
