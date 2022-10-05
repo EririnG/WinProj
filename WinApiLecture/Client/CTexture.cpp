@@ -3,6 +3,8 @@
 
 #include "CCore.h"
 
+
+
 CTexture::CTexture()
 	: m_hBit(0)
 	, m_dc(0)

@@ -12,6 +12,7 @@ CMonster::CMonster()
 	, m_fSpeed(100.f)
 	, m_iDir(1)
 {
+	CreateCollider();
 }
 
 

@@ -16,9 +16,10 @@ public:
     UINT Width() { return m_bitInfo.bmWidth; }
     UINT Height() { return m_bitInfo.bmHeight; }
 
-    HDC GetDC() { return m_dc; }
-public:
+    HDC GetDC() {return m_dc;}
+private:
     CTexture();
     ~CTexture();
 
+    friend class CResMgr;
 };
