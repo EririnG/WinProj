@@ -68,6 +68,9 @@
     <Filter Include="Engine\07. Conponent">
       <UniqueIdentifier>{79e41ff8-20c8-4801-aef8-a31746fb4ced}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Engine\08. Module">
+      <UniqueIdentifier>{e6f0f281-1448-457c-9e45-d57f5b7f78c2}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CCore.h">
@@ -137,6 +140,9 @@
     <ClInclude Include="CCollider.h">
       <Filter>Engine\07. Conponent</Filter>
     </ClInclude>
+    <ClInclude Include="SelectGDI.h">
+      <Filter>Engine\08. Module</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CCore.cpp">
@@ -187,6 +193,9 @@
     </ClCompile>
     <ClCompile Include="CCollider.cpp">
       <Filter>Engine\07. Conponent</Filter>
+    </ClCompile>
+    <ClCompile Include="SelectGDI.cpp">
+      <Filter>Engine\08. Module</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

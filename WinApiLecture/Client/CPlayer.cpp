@@ -10,12 +10,16 @@
 
 #include "CMissile.h"
 #include "CTexture.h"
+#include "CCollider.h"
+
 
 CPlayer::CPlayer()
 	: m_pTex(nullptr)
 {
 	m_pTex = CResMgr::GetInst()->LoadTexture(L"PlayerTex", L"texture\\player.bmp");
 	CreateCollider();
+
+	GetCollider()->SetScale(Vec2(100.f, 100.f));
 }
 
 CPlayer::~CPlayer()
@@ -83,11 +87,8 @@ void CPlayer::render(HDC _dc)
 		m_pTex->GetDC(),
 		0, 0, iWidth, iHeight,RGB(255,0,255) );
 
-	/*Vec2 vPos = GetPos();
-	Vec2 VScale = GetScale();
-
-	Rectangle(_dc, (int)(vPos.x - VScale.x / 2.f), (int)(vPos.y - VScale.y / 2.f)
-		, (int)(vPos.x + VScale.x / 2.f), (int)(vPos.y + VScale.y / 2.f));*/
+	// 컴포넌트가 있는경우 렌더
+	component_render(_dc);
 
 }
 
