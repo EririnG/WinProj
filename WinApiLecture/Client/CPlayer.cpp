@@ -68,8 +68,8 @@ void CPlayer::render(HDC _dc)
 
 	Vec2 vPos = GetPos();
 
-	int(vPos.x - (float)(iWidth / 2));
-	int(vPos.y - (float)(iHeight / 2));
+	//int(vPos.x - (float)(iWidth / 2));
+	//int(vPos.y - (float)(iHeight / 2));
 
 	/*BitBlt(_dc,
 		int(vPos.x - (float)(iWidth / 2)),

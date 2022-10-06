@@ -2,17 +2,25 @@
 #include "CMonster.h"
 #include "CMissile.h"
 #include "CScene.h"
+#include "CCollider.h"
+#include "CRes.h"
 
 #include "CTimeMgr.h"
 #include "CSeneMgr.h"
+#include "CResMgr.h"
+
 
 CMonster::CMonster()
 	: m_vCenterpos(Vec2(0.f, 0.f))
 	, m_fMaxDistance(50.f)
 	, m_fSpeed(100.f)
 	, m_iDir(1)
+	, m_pTex(nullptr)
 {
+	m_pTex = CResMgr::GetInst()->LoadTexture(L"MonsterTex", L"texture\\monster.bmp");
 	CreateCollider();
+
+	GetCollider()->SetScale(Vec2(55.f, 55.f));
 }
 
 
@@ -53,6 +61,7 @@ void CMonster::update()
 
 	SetPos(vCurPos);
 
+
 	int call = CTimeMgr::GetInst()->GetCallCount();
 	if (call == 2)
 	{
@@ -69,6 +78,21 @@ void CMonster::render(HDC _dc)
 	Vec2 vPos = GetPos();
 	Vec2 VScale = GetScale();
 
-	Rectangle(_dc, (int)(vPos.x - VScale.x / 2.f), (int)(vPos.y - VScale.y / 2.f)
-		, (int)(vPos.x + VScale.x / 2.f), (int)(vPos.y + VScale.y / 2.f));
+	int iWidth = (int)m_pTex->Width();
+	int iHeight = (int)m_pTex->Height();
+
+
+	/*Rectangle(_dc, (int)(vPos.x - VScale.x / 2.f), (int)(vPos.y - VScale.y / 2.f)
+		, (int)(vPos.x + VScale.x / 2.f), (int)(vPos.y + VScale.y / 2.f));*/
+
+	TransparentBlt(_dc,
+		int(vPos.x - (float)(iWidth / 2)),
+		int(vPos.y - (float)(iHeight / 2)),
+		iWidth,
+		iHeight,
+		m_pTex->GetDC(),
+		0, 0, iWidth, iHeight, RGB(255, 0, 255));
+
+	// 컴포넌트가 있는경우 렌더
+	component_render(_dc);
 }
