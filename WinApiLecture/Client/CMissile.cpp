@@ -33,7 +33,6 @@ CMissile::~CMissile()
 void CMissile::update()
 {
 	Vec2 vPos = GetPos();
-
 	vPos.x += 600.f * fDT * m_vDir.x;
 	vPos.y += 600.f * fDT * m_vDir.y;
 

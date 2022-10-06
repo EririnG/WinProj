@@ -14,8 +14,8 @@
 CScene_Start::CScene_Start()
 	: m_pTex(nullptr)
 {
-	m_pTex = CResMgr::GetInst()->LoadTexture(L"StartSceneTex", L"texture\\scene\\start.bmp");
-	SetScene(m_pTex);
+	/*m_pTex = CResMgr::GetInst()->LoadTexture(L"StartSceneTex", L"texture\\scene\\start.bmp");
+	SetScene(m_pTex);*/
 
 }
 

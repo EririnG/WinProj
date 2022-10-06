@@ -44,9 +44,6 @@
     <Filter Include="Engine\04. Object\Player">
       <UniqueIdentifier>{78d7ae10-8665-4c3b-9486-d56f2f6a3ab1}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Engine\04. Object\Moster">
-      <UniqueIdentifier>{de161fc7-5c82-40e5-9ae5-212a8b999cc7}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Engine\04. Object\Missile">
       <UniqueIdentifier>{2bd262f0-beeb-4dd2-91f9-94945be7cecb}</UniqueIdentifier>
     </Filter>
@@ -70,6 +67,12 @@
     </Filter>
     <Filter Include="Engine\08. Module">
       <UniqueIdentifier>{e6f0f281-1448-457c-9e45-d57f5b7f78c2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\04. Object\Monster">
+      <UniqueIdentifier>{de161fc7-5c82-40e5-9ae5-212a8b999cc7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\04. Object\Monster\MonsterType">
+      <UniqueIdentifier>{635eb77e-869e-4607-8a36-06deb1b8e481}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -117,7 +120,7 @@
       <Filter>Engine\04. Object\Player</Filter>
     </ClInclude>
     <ClInclude Include="CMonster.h">
-      <Filter>Engine\04. Object\Moster</Filter>
+      <Filter>Engine\04. Object\Monster</Filter>
     </ClInclude>
     <ClInclude Include="CMissile.h">
       <Filter>Engine\04. Object\Missile</Filter>
@@ -142,6 +145,9 @@
     </ClInclude>
     <ClInclude Include="SelectGDI.h">
       <Filter>Engine\08. Module</Filter>
+    </ClInclude>
+    <ClInclude Include="CSLIME.h">
+      <Filter>Engine\04. Object\Monster\MonsterType</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -171,7 +177,7 @@
       <Filter>Engine\04. Object\Player</Filter>
     </ClCompile>
     <ClCompile Include="CMonster.cpp">
-      <Filter>Engine\04. Object\Moster</Filter>
+      <Filter>Engine\04. Object\Monster</Filter>
     </ClCompile>
     <ClCompile Include="CMissile.cpp">
       <Filter>Engine\04. Object\Missile</Filter>
@@ -196,6 +202,9 @@
     </ClCompile>
     <ClCompile Include="SelectGDI.cpp">
       <Filter>Engine\08. Module</Filter>
+    </ClCompile>
+    <ClCompile Include="CSLIME.cpp">
+      <Filter>Engine\04. Object\Monster\MonsterType</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
