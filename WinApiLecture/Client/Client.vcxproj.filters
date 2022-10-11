@@ -74,6 +74,9 @@
     <Filter Include="Engine\04. Object\Monster\MonsterType">
       <UniqueIdentifier>{635eb77e-869e-4607-8a36-06deb1b8e481}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Engine\03. Manger\CollisionMgr">
+      <UniqueIdentifier>{391df069-3758-4f06-884b-8bf1b6085dbd}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CCore.h">
@@ -149,6 +152,9 @@
     <ClInclude Include="CSLIME.h">
       <Filter>Engine\04. Object\Monster\MonsterType</Filter>
     </ClInclude>
+    <ClInclude Include="CCollisionMgr.h">
+      <Filter>Engine\03. Manger\CollisionMgr</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CCore.cpp">
@@ -205,6 +211,9 @@
     </ClCompile>
     <ClCompile Include="CSLIME.cpp">
       <Filter>Engine\04. Object\Monster\MonsterType</Filter>
+    </ClCompile>
+    <ClCompile Include="CCollisionMgr.cpp">
+      <Filter>Engine\03. Manger\CollisionMgr</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -6,8 +6,11 @@
 
 #include "SelectGDI.h"
 
+UINT CCollider::g_iNextID = 0;
+
 CCollider::CCollider()
 	: m_pOwner(nullptr)
+	, m_iID(g_iNextID++)
 {
 }
 
@@ -24,7 +27,7 @@ void CCollider::finalupdate()
 
 void CCollider::render(HDC _dc)
 {
-	SelectGDI g(_dc, PEN_TYPE::RED);
+	SelectGDI g(_dc, PEN_TYPE::GREEN);
 	SelectGDI h(_dc, BRUSH_TYPE::HOLLOW);
 
 	Rectangle(_dc

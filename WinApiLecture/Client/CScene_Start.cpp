@@ -10,6 +10,8 @@
 #include "CPathMgr.h"
 #include "CTexture.h"
 #include "CResMgr.h"
+#include "CCollisionMgr.h"
+
 
 CScene_Start::CScene_Start()
 	: m_pTex(nullptr)
@@ -26,14 +28,11 @@ CScene_Start::~CScene_Start()
 
 void CScene_Start::Enter()
 {
-	
-
-
 	// Object 추가
 	CObject* pObj = new CPlayer;
 	pObj->SetPos(Vec2(640.f,640.f));
 	pObj->SetScale(Vec2(100.f,100.f));
-	AddObject(pObj, GROUP_TYPE::DEFAULT);
+	AddObject(pObj, GROUP_TYPE::PLAYER);
 
 
 	 //몬스터 배치
@@ -62,7 +61,7 @@ void CScene_Start::Enter()
 		pAMonsterObj->SetScale(Vec2(fAMon_ObjScale, fAMon_ObjScale));
 		pAMonsterObj->SetMoveDistance(fAMon_MoveDist);
 		pAMonsterObj->SetCenterPos(pAMonsterObj->GetPos());
-		AddObject(pAMonsterObj, GROUP_TYPE::DEFAULT);
+		AddObject(pAMonsterObj, GROUP_TYPE::MONSTER);
 	}
 	for (int i = 0; i < iBMon_Count; ++i)
 	{
@@ -71,12 +70,16 @@ void CScene_Start::Enter()
 		pBMonsterObj->SetScale(Vec2(fBMon_ObjScale, fBMon_ObjScale));
 		pBMonsterObj->SetMoveDistance(fBMon_MoveDist);
 		pBMonsterObj->SetCenterPos(pBMonsterObj->GetPos());
-		AddObject(pBMonsterObj, GROUP_TYPE::DEFAULT);
-
+		AddObject(pBMonsterObj, GROUP_TYPE::MONSTER);
 	}
+
+	// 충돌 지정
+	// Player 그룹과 Monster 그룹 간의 충돌체크
+	CCollisionMgr::GetInst()->CheckGroup(GROUP_TYPE::PLAYER, GROUP_TYPE::MONSTER);
 
 }
 
 void CScene_Start::Exit()
 {
+	CCollisionMgr::GetInst()->Reset();
 }
