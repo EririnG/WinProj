@@ -40,19 +40,63 @@ void CCollisionMgr::CollisionGroupUpdate(GROUP_TYPE _eLeft, GROUP_TYPE _eRight)
 		// 충돌체를 보유하지 않은 경우
 		if (nullptr == vecLeft[i]->GetCollider())
 			continue;
+
+
+
+
 		for (size_t j = 0; j < vecRight.size(); ++j)
 		{
 			// 충돌체가 없거나, 자기 자신과의 충돌인 경우
 			if (nullptr == vecRight[j]->GetCollider() || vecLeft[i]==vecRight[j])
 				continue;
 
-			if (IsCollision(vecLeft[i]->GetCollider(), vecRight[j]->GetCollider()))
-			{
+			CCollider* pLeftCol = vecLeft[i]->GetCollider();
+			CCollider* pRighttCol = vecLeft[j]->GetCollider();
 
+			// 두 충돌체 조합 아이디 생성
+			COLLIDER_ID ID;
+			ID.Left_id = pLeftCol->GetID();
+			ID.Right_id = pRighttCol->GetID();
+
+			map < ULONGLONG, bool>::iterator iter = m_mapColInfo.find(ID.ID);
+
+			//충돌 정보가 미 등록 상태인 경우 등록( 충돌하지 않았다로 등록 )
+			if (m_mapColInfo.end() == iter)
+			{
+				m_mapColInfo.insert(make_pair(ID.ID, false));
+				iter = m_mapColInfo.find(ID.ID);
+			}
+
+
+			if (IsCollision(pLeftCol, pRighttCol))
+			{
+				//현재 충돌 중이다.
+				if (iter->second)
+				{
+					// 이전에도 충돌 하고 있었다.
+					pLeftCol->OnCollision(pRighttCol);
+					pRighttCol->OnCollision(pLeftCol);
+				}
+				else
+				{
+					// 이전에는 충돌하지 않았다.
+					// 충돌한 시점 딲!!
+					pLeftCol->OnCollisionEnter(pRighttCol);
+					pRighttCol->OnCollisionEnter(pLeftCol);
+					iter->second = true;
+				}
+				
 			}
 			else
 			{
-
+				// 현재 충돌하고 있지 않다.
+				if (iter->second)
+				{
+					// 충돌에서 막 벗어난 시점
+					pLeftCol->OnCollisionExit(pRighttCol);
+					pRighttCol->OnCollisionExit(pLeftCol);
+					iter->second = false;
+				}
 			}
 
 		}
