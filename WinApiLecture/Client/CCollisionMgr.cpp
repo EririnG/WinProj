@@ -1,12 +1,17 @@
 #include "pch.h"
 
+#include "CCollider.h"
 #include "CCollisionMgr.h"
 #include "CSeneMgr.h"
 
 #include "CScene.h"
 #include "CObject.h"
 
+
+
+
 CCollisionMgr::CCollisionMgr()
+	: m_arrCheck{}
 {
 }
 
@@ -32,26 +37,29 @@ void CCollisionMgr::update()
 void CCollisionMgr::CollisionGroupUpdate(GROUP_TYPE _eLeft, GROUP_TYPE _eRight)
 {
 	CScene* pCurScene = CSeneMgr::GetInst()->GetCurScene();
+
 	const vector<CObject*>& vecLeft = pCurScene->GetGroupObject(_eLeft);
 	const vector<CObject*>& vecRight = pCurScene->GetGroupObject(_eRight);
 
 	for (size_t i = 0; i < vecLeft.size(); ++i)
-	{
+	{ 
 		// 충돌체를 보유하지 않은 경우
 		if (nullptr == vecLeft[i]->GetCollider())
+		{
 			continue;
-
-
-
+		}
 
 		for (size_t j = 0; j < vecRight.size(); ++j)
 		{
 			// 충돌체가 없거나, 자기 자신과의 충돌인 경우
-			if (nullptr == vecRight[j]->GetCollider() || vecLeft[i]==vecRight[j])
+			if (nullptr == vecRight[j]->GetCollider() 
+				|| vecLeft[i] == vecRight[j])
+			{
 				continue;
+			}
 
 			CCollider* pLeftCol = vecLeft[i]->GetCollider();
-			CCollider* pRighttCol = vecLeft[j]->GetCollider();
+			CCollider* pRighttCol = vecRight[j]->GetCollider();
 
 			// 두 충돌체 조합 아이디 생성
 			COLLIDER_ID ID;
@@ -105,6 +113,20 @@ void CCollisionMgr::CollisionGroupUpdate(GROUP_TYPE _eLeft, GROUP_TYPE _eRight)
 
 bool CCollisionMgr::IsCollision(CCollider* _pLeftCol, CCollider* _pRightCol)
 {
+	Vec2 vLeftPos = _pLeftCol->GetFinalPos();
+	Vec2 vLeftScale = _pLeftCol->GetScale();
+
+
+	Vec2 vRightPos = _pRightCol->GetFinalPos();
+	Vec2 vRightScale = _pRightCol->GetScale();
+
+	if (abs(vRightPos.x - vLeftPos.x) < (vLeftScale.x + vRightScale.x) / 2.f &&
+		abs(vRightPos.y - vLeftPos.y) < (vLeftScale.y + vRightScale.y) / 2.f)
+	{
+
+		return true;
+	}
+
 	return false;
 }
 

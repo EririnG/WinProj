@@ -21,6 +21,8 @@ public:
 	Vec2 GetOffsetPos() { return m_vOffsetPos; }
 	Vec2 GetScale() { return m_vScale; }
 
+	Vec2 GetFinalPos() { return m_vFinalPos; }
+
 	UINT GetID() { return m_iID; }
 
 public:

@@ -1,6 +1,6 @@
 #pragma once
-
 #include "CCollider.h"
+
 
 union COLLIDER_ID
 {
@@ -8,7 +8,7 @@ union COLLIDER_ID
 		UINT Left_id;
 		UINT Right_id;
 	};
-	ULONGLONG ID
+	ULONGLONG ID;
 };
 
 class CCollisionMgr

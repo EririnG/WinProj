@@ -49,3 +49,11 @@ void CCollider::render(HDC _dc)
 void CCollider::OnCollision(CCollider* _pOther)
 {
 }
+
+void CCollider::OnCollisionEnter(CCollider* _pOther)
+{
+}
+
+void CCollider::OnCollisionExit(CCollider* _pOther)
+{
+}
