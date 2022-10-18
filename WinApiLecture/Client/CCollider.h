@@ -13,6 +13,8 @@ private:
 	Vec2 m_vScale;		// 충돌체의 크기
 
 	UINT m_iID; // 충돌체의 고유한 ID값
+	UINT m_iCol; 
+
 
 public:
 	void SetOffsetPos(Vec2 _vPos) { m_vOffsetPos = _vPos; }
