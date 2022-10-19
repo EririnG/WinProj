@@ -44,6 +44,15 @@ void CMonster::CreateMissile()
 	pCurScene->AddObject(pMissile, GROUP_TYPE::DEFAULT);
 }
 
+void CMonster::OnCollisionEnter(CCollider* _pOther)
+{
+	CObject* pOtherObj =_pOther->GetObj();
+	
+
+
+	int a = 0;
+}
+
 void CMonster::update()
 {
 	Vec2 vCurPos = GetPos();

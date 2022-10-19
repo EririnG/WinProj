@@ -59,3 +59,13 @@ enum class PEN_TYPE
 	BLUE,
 	END,
 };
+
+enum class EVENT_TYPE
+{
+	CREATE_OBJECT,
+	DELETE_OBJECT,
+	SCENE_CHANGE,
+
+
+	END,
+};

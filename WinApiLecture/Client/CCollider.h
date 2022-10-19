@@ -13,7 +13,8 @@ private:
 	Vec2 m_vScale;		// 충돌체의 크기
 
 	UINT m_iID; // 충돌체의 고유한 ID값
-	UINT m_iCol; 
+	int  m_iCol; 
+	
 
 
 public:
@@ -24,6 +25,8 @@ public:
 	Vec2 GetScale() { return m_vScale; }
 
 	Vec2 GetFinalPos() { return m_vFinalPos; }
+
+	CObject* GetObj() { return m_pOwner; }
 
 	UINT GetID() { return m_iID; }
 
