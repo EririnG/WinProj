@@ -11,6 +11,8 @@ private:
 	float	m_fSpeed;
 	float	m_fMaxDistance;
 	int     m_iDir;
+
+	int		m_iHP;
 	CTexture* m_pTex;
 
 

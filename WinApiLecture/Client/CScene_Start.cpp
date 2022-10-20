@@ -57,6 +57,7 @@ void CScene_Start::Enter()
 	{
 		// Monster Object 추가
 		pAMonsterObj = new CMonster;
+		pAMonsterObj->SetName(L"Monster");
 		pAMonsterObj->SetPos(Vec2((fAMon_MoveDist + fAMon_ObjScale / 2.f) + (float)i* fATerm, 100.f));
 		pAMonsterObj->SetScale(Vec2(fAMon_ObjScale, fAMon_ObjScale));
 		pAMonsterObj->SetMoveDistance(fAMon_MoveDist);
@@ -76,6 +77,7 @@ void CScene_Start::Enter()
 	// 충돌 지정
 	// Player 그룹과 Monster 그룹 간의 충돌체크
 	CCollisionMgr::GetInst()->CheckGroup(GROUP_TYPE::PLAYER, GROUP_TYPE::MONSTER);
+	CCollisionMgr::GetInst()->CheckGroup(GROUP_TYPE::MONSTER, GROUP_TYPE::PROJ_PLAYER);
 
 }
 

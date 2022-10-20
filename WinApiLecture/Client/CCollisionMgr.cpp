@@ -9,7 +9,6 @@
 
 
 
-
 CCollisionMgr::CCollisionMgr()
 	: m_arrCheck{}
 {
@@ -82,21 +81,35 @@ void CCollisionMgr::CollisionGroupUpdate(GROUP_TYPE _eLeft, GROUP_TYPE _eRight)
 				if (iter->second)
 				{
 					// 이전에도 충돌 하고 있었다.
-					pLeftCol->OnCollision(pRighttCol);
-					pRighttCol->OnCollision(pLeftCol);
+					if (vecLeft[i]->IsDead() || vecRight[j]->IsDead())
+					{
+						// 둘중 하나가 삭제 예정이라면, 충돌 해제시켜준다.
+						pLeftCol->OnCollisionExit(pRighttCol);
+						pRighttCol->OnCollisionExit(pLeftCol);
+						iter->second = false;
+					}
+					else
+					{
+						pLeftCol->OnCollision(pRighttCol);
+						pRighttCol->OnCollision(pLeftCol);
+					}
 				}
 				else
 				{
 					// 이전에는 충돌하지 않았다.
 					// 충돌한 시점 딲!!
-					pLeftCol->OnCollisionEnter(pRighttCol);
-					pRighttCol->OnCollisionEnter(pLeftCol);
-					iter->second = true;
+					// 둘중 하나가 삭제 예정이라면, 충돌하지 않은것으로 취급.
+					if (!vecLeft[i]->IsDead() && !vecRight[j]->IsDead())
+					{
+						pLeftCol->OnCollisionEnter(pRighttCol);
+						pRighttCol->OnCollisionEnter(pLeftCol);
+						iter->second = true;
+					}
 				}
-				
 			}
 			else
 			{
+
 				// 현재 충돌하고 있지 않다.
 				if (iter->second)
 				{

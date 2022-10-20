@@ -36,9 +36,7 @@ void CMissile::update()
 	vPos.x += 600.f * fDT * m_vDir.x;
 	vPos.y += 600.f * fDT * m_vDir.y;
 
-
 	SetPos(vPos);
-
 }
 
 void CMissile::render(HDC _dc)
