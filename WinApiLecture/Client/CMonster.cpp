@@ -6,7 +6,7 @@
 #include "CRes.h"
 
 #include "CTimeMgr.h"
-#include "CSeneMgr.h"
+#include "CSceneMgr.h"
 #include "CResMgr.h"
 
 
@@ -41,7 +41,7 @@ void CMonster::CreateMissile()
 	pMissile->SetScale(Vec2(10.f, 10.f));
 	pMissile->SetDir(3.f * PI / 2.f);
 
-	CScene* pCurScene = CSeneMgr::GetInst()->GetCurScene();
+	CScene* pCurScene = CSceneMgr::GetInst()->GetCurScene();
 	pCurScene->AddObject(pMissile, GROUP_TYPE::DEFAULT);
 }
 

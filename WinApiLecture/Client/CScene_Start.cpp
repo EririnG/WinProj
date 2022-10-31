@@ -11,7 +11,8 @@
 #include "CTexture.h"
 #include "CResMgr.h"
 #include "CCollisionMgr.h"
-
+#include "CKeyMgr.h"
+#include "CSceneMgr.h"
 
 CScene_Start::CScene_Start()
 	: m_pTex(nullptr)
@@ -24,6 +25,16 @@ CScene_Start::CScene_Start()
 CScene_Start::~CScene_Start()
 {
 
+}
+
+void CScene_Start::update()
+{
+	CScene::update();
+
+	if (KEY_TAP(KEY::ENTER))
+	{
+		ChangeScene(SCENE_TYPE::TOOL);
+	}
 }
 
 void CScene_Start::Enter()
@@ -83,5 +94,7 @@ void CScene_Start::Enter()
 
 void CScene_Start::Exit()
 {
+	DeleteAll();
+
 	CCollisionMgr::GetInst()->Reset();
 }

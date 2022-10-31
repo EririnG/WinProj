@@ -3,7 +3,7 @@
 #include "CObject.h"
 #include "CKeyMgr.h"
 #include "CTimeMgr.h"
-#include "CSeneMgr.h"
+#include "CSceneMgr.h"
 #include "CPathMgr.h"
 #include "CCollisionMgr.h"
 #include "CEventMgr.h"
@@ -59,7 +59,7 @@ int CCore::init(HWND _hWnd, POINT _ptResolution)
 	CPathMgr::GetInst()->init();
 	CTimeMgr::GetInst()->init();
 	CKeyMgr::GetInst()->init();
-	CSeneMgr::GetInst()->init();
+	CSceneMgr::GetInst()->init();
 
 	return S_OK;
 }
@@ -77,7 +77,7 @@ void CCore::Progress()
 	// ============
 	// Scene Update
 	// ============
-	CSeneMgr::GetInst()->update();
+	CSceneMgr::GetInst()->update();
 
 	// 충돌체크
 	CCollisionMgr::GetInst()->update();
@@ -89,7 +89,7 @@ void CCore::Progress()
 	//화면 Clear
 	Rectangle(m_memDC, -1, -1, m_ptResolution.x + 1, m_ptResolution.y + 1);
 	
-	CSeneMgr::GetInst()->render(m_memDC);
+	CSceneMgr::GetInst()->render(m_memDC);
 
 	BitBlt(m_hDC, 0, 0, m_ptResolution.x, m_ptResolution.y
 		, m_memDC, 0, 0, SRCCOPY);

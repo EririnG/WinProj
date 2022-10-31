@@ -17,9 +17,9 @@ public:
 
 	
 
-	void update();
-	void finalupdate();
-	void render(HDC _dc);
+	virtual void update();
+	virtual void finalupdate();
+	virtual void render(HDC _dc);
 
 	void SetScene(CTexture* _cTexture) { m_pTex = _cTexture; }
 	CTexture* GetScene(){return m_pTex;}
@@ -34,8 +34,8 @@ public:
 	}
 
 	const vector<CObject*>& GetGroupObject(GROUP_TYPE _eType) { return m_arrObj[(UINT)_eType];}
-
-
+	void DeleteGroup(GROUP_TYPE _eTarget);
+	void DeleteAll();
 
 
 public:

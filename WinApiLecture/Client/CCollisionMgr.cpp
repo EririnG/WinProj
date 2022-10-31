@@ -2,7 +2,7 @@
 
 #include "CCollider.h"
 #include "CCollisionMgr.h"
-#include "CSeneMgr.h"
+#include "CSceneMgr.h"
 
 #include "CScene.h"
 #include "CObject.h"
@@ -35,7 +35,7 @@ void CCollisionMgr::update()
 
 void CCollisionMgr::CollisionGroupUpdate(GROUP_TYPE _eLeft, GROUP_TYPE _eRight)
 {
-	CScene* pCurScene = CSeneMgr::GetInst()->GetCurScene();
+	CScene* pCurScene = CSceneMgr::GetInst()->GetCurScene();
 
 	const vector<CObject*>& vecLeft = pCurScene->GetGroupObject(_eLeft);
 	const vector<CObject*>& vecRight = pCurScene->GetGroupObject(_eRight);

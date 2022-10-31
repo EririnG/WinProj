@@ -2,7 +2,7 @@
 #include "CPlayer.h"
 #include "CScene.h"
 
-#include "CSeneMgr.h"
+#include "CSceneMgr.h"
 #include "CKeyMgr.h"
 #include "CTimeMgr.h"
 #include "CPathMgr.h"

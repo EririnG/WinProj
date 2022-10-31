@@ -3,7 +3,7 @@
 
 #include "CObject.h"
 #include "CScene.h"
-#include "CSeneMgr.h"
+#include "CSceneMgr.h"
 
 CEventMgr::CEventMgr()
 {
@@ -48,7 +48,7 @@ void CEventMgr::Excute(const tEvent& _eve)
 		CObject* pNewObj = (CObject*)_eve.lParam;
 		GROUP_TYPE eType = (GROUP_TYPE)_eve.wParam;
 
-		CSeneMgr::GetInst()->GetCurScene()->AddObject(pNewObj, eType);
+		CSceneMgr::GetInst()->GetCurScene()->AddObject(pNewObj, eType);
 	}
 
 		break;
@@ -66,7 +66,8 @@ void CEventMgr::Excute(const tEvent& _eve)
 
 		break;
 	case EVENT_TYPE::SCENE_CHANGE:
-
+		// lParam : Next Scene Yype
+		CSceneMgr::GetInst()->ChangeScene((SCENE_TYPE)_eve.lParam);
 		break;
 
 	}

@@ -5,7 +5,7 @@
 
 
 #include "CTimeMgr.h"
-#include "CSeneMgr.h"
+#include "CSceneMgr.h"
 #include "CKeyMgr.h"
 #include "CResMgr.h"
 
