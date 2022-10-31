@@ -1,11 +1,14 @@
 #pragma once
 #include"CTexture.h"
 
+class CRes;
+class CTexture;
+
 class CResMgr
 {
 	SINGLE(CResMgr);
 private:
-	map<wstring, CTexture*> m_mapTex; 
+	map<wstring, CRes*> m_mapTex;
 
 public:
 	CTexture* LoadTexture(const wstring& _strKey, const wstring& _strRelativePath);
