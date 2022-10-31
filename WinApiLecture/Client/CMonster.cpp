@@ -80,14 +80,11 @@ void CMonster::update()
 	SetPos(vCurPos);
 
 
-	int call = CTimeMgr::GetInst()->GetCallCount();
+	/*int call = CTimeMgr::GetInst()->GetCallCount();
 	if (call == 2)
 	{
 		CreateMissile();
-	}
-
-
-
+	}*/
 
 }
 

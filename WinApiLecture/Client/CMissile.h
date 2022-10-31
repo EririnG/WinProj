@@ -24,6 +24,7 @@ public:
 public:
     virtual void update();
     virtual void render(HDC _dc);
+    CLONE(CMissile);
 
 public:
     void ChangeMissile();
