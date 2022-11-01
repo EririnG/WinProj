@@ -5,6 +5,7 @@
 CAnimator::CAnimator()
 	: m_pCurAnim(nullptr)
 	, m_pOwner(nullptr)
+	, m_bRepeat(false)
 {
 }
 
@@ -38,6 +39,12 @@ CAnimation* CAnimator::FindAnimation(const wstring& _strName)
 	return iter->second;
 }
 
+void CAnimator::Play(const wstring& _strName, bool _bRepeat)
+{
+	m_pCurAnim = FindAnimation(_strName);
+	m_bRepeat = _bRepeat;
+}
+
 void CAnimator::render(HDC _dc)
 {
 	if (nullptr != m_pCurAnim)
@@ -48,5 +55,13 @@ void CAnimator::update()
 {
 
 	if (nullptr != m_pCurAnim)
+	{
 		m_pCurAnim->update();
+		
+		if (m_bRepeat && m_pCurAnim->IsFinish())
+		{
+			m_pCurAnim->SetFrame(0);
+		}
+	}
+
 }
