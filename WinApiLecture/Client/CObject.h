@@ -13,7 +13,7 @@ private:
 
 	// Component
 	CCollider*  m_pCollider;
-	CAnimator*	m_pAnimaor;
+	CAnimator*	m_pAnimator;
 
 	bool		m_bAlive;
 
@@ -28,10 +28,12 @@ public:
 	const wstring& GetName() { return m_strName; }
 
 	CCollider* GetCollider() { return m_pCollider; }
+	CAnimator* GetAnimator() { return m_pAnimator; }
 
 	bool IsDead() { return !m_bAlive; }
 
 	void CreateCollider();
+	void CreateAnimator();
 
 	virtual void OnCollision(CCollider* _pOther) {}
 	virtual void OnCollisionEnter(CCollider* _pOther) {}

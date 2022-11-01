@@ -11,17 +11,23 @@
 #include "CMissile.h"
 #include "CTexture.h"
 #include "CCollider.h"
+#include "CAnimator.h"
 
 
 CPlayer::CPlayer()
 	: m_pTex(nullptr)
 {
-	m_pTex = CResMgr::GetInst()->LoadTexture(L"PlayerTex", L"texture\\player.bmp");
+	//m_pTex = CResMgr::GetInst()->LoadTexture(L"PlayerTex", L"texture\\link_0.bmp");
 	
 	
 	CreateCollider();
 	GetCollider()->SetOffsetPos(Vec2(1.f, 0.f));
 	GetCollider()->SetScale(Vec2(10.f, 40.f));
+
+	// Texture 로딩하기
+	m_pTex = CResMgr::GetInst()->LoadTexture(L"PlayerTex", L"texture\\link_0.bmp");
+	CreateAnimator();
+	GetAnimator()->CreateAnimation(L"WALK_DOWN", m_pTex, Vec2(0.f, 260.f), Vec2(60.f, 65.f), Vec2(60.f, 0.f),1.f, 10);
 }
 
 CPlayer::~CPlayer()
