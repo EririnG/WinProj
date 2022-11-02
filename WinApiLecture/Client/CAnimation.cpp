@@ -36,7 +36,10 @@ void CAnimation::update()
 		{
 			m_iCurFrm = -1;
 			m_bFinish = true;
+			m_fAccTime = 0.f;
+			return;
 		}
+
 		m_fAccTime = m_fAccTime - m_vecFrm[m_iCurFrm].fDuration;
 	}
 }
@@ -49,6 +52,7 @@ void CAnimation::render(HDC _dc)
 	CObject* pObj = m_pAnimator->GetObj();
 	Vec2 vPos = pObj->GetPos();
 	
+	vPos += m_vecFrm[m_iCurFrm].vOffset; // Object Position 에 Offset 만큼 추가 이동위치
 
 	TransparentBlt(_dc
 		, (int)(vPos.x - m_vecFrm[m_iCurFrm].vSlice.x / 2.f)

@@ -4,6 +4,7 @@
 #include "CObject.h"
 #include "CPlayer.h"
 #include "CMonster.h"
+#include "CCamera.h"
 
 #include "CCore.h"
 
@@ -13,6 +14,7 @@
 #include "CCollisionMgr.h"
 #include "CKeyMgr.h"
 #include "CSceneMgr.h"
+
 
 CScene_Start::CScene_Start()
 	: m_pTex(nullptr)
@@ -92,6 +94,9 @@ void CScene_Start::Enter()
 	// Player 그룹과 Monster 그룹 간의 충돌체크
 	CCollisionMgr::GetInst()->CheckGroup(GROUP_TYPE::PLAYER, GROUP_TYPE::MONSTER);
 	CCollisionMgr::GetInst()->CheckGroup(GROUP_TYPE::MONSTER, GROUP_TYPE::PROJ_PLAYER);
+
+	// Camera Look 지정
+	CCamera::GetInst()->SetLookAt(vResolution / 2.f);
 
 }
 
