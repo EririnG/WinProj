@@ -9,6 +9,7 @@
 
 CCamera::CCamera()
 	:	m_pTarjetObj(nullptr)
+	,	m_fTime(1.5f)
 {}
 
 CCamera::~CCamera()
@@ -46,9 +47,19 @@ void CCamera::update()
 void CCamera::CalDiff()
 {
 	// 이전 LookAt과 현재 Look의 차이값을 보정해서 현재의 LookAt을 구한다.
-	Vec2 vLookDir = m_vLookAt - m_vPrevLookAt; // 방향
 	
-	m_vCurLookAt = m_vPrevLookAt+ vLookDir.Normalize() * 500.f * fDT;
+	m_fAccTime += fDT;
+
+	if (m_fTime <= m_fAccTime)
+	{
+		m_vCurLookAt = m_vLookAt;
+	}
+	else
+	{
+		Vec2 vLookDir = m_vLookAt - m_vPrevLookAt;
+		m_vCurLookAt = m_vPrevLookAt + vLookDir.Normalize() * m_fSpeed * fDT;
+	}
+
 
 	Vec2 vResolution = CCore::GetInst()->GetResolution();
 	Vec2 vCenter = vResolution / 2;
