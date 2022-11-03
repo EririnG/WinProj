@@ -37,6 +37,11 @@ void CScene_Start::update()
 	{
 		ChangeScene(SCENE_TYPE::TOOL);
 	}
+	if (KEY_TAP(KEY::LBTN))
+	{
+		Vec2 vLookAt = CCamera::GetInst()->GetRealPos(MOUSE_POS);
+		CCamera::GetInst()->SetLookAt(vLookAt);
+	}
 }
 
 void CScene_Start::Enter()
@@ -50,6 +55,8 @@ void CScene_Start::Enter()
 	//CObject* pOtherPlayer = pObj->Clone();
 	//pOtherPlayer->SetPos(Vec2(740.f, 640.f));
 	//AddObject(pOtherPlayer, GROUP_TYPE::PLAYER);
+
+	//CCamera::GetInst()->SetTarget(pObj);
 
 	 //몬스터 배치
 	int iAMon_Count = 5;

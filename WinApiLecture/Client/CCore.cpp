@@ -1,12 +1,14 @@
 #include "pch.h"
 #include "CCore.h"
 #include "CObject.h"
+#include "CCamera.h"
 #include "CKeyMgr.h"
 #include "CTimeMgr.h"
 #include "CSceneMgr.h"
 #include "CPathMgr.h"
 #include "CCollisionMgr.h"
 #include "CEventMgr.h"
+
 CCore::CCore()
 	: m_hWnd(0)
 	, m_ptResolution{}
@@ -74,6 +76,7 @@ void CCore::Progress()
 
 	CTimeMgr::GetInst()->update();
 	CKeyMgr::GetInst()->update();
+	CCamera::GetInst()->update();
 	// ============
 	// Scene Update
 	// ============
