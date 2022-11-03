@@ -14,7 +14,9 @@
 #include "CAnimator.h"
 #include "CAnimation.h"
 
+
 CPlayer::CPlayer()
+	: m_pTex(nullptr)
 {
 	//m_pTex = CResMgr::GetInst()->LoadTexture(L"PlayerTex", L"texture\\link_0.bmp");
 	
