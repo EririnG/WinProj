@@ -89,6 +89,9 @@
     <Filter Include="Engine\03. Manger\Camera">
       <UniqueIdentifier>{2a0142bf-1d5c-46b2-af62-8c39fe5f1fc9}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Engine\04. Object\Tile">
+      <UniqueIdentifier>{acb16d0d-fa18-4b3e-807e-3705fee0dcbf}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CCore.h">
@@ -182,6 +185,12 @@
     <ClInclude Include="CCamera.h">
       <Filter>Engine\03. Manger\Camera</Filter>
     </ClInclude>
+    <ClInclude Include="CTile.h">
+      <Filter>Engine\04. Object\Tile</Filter>
+    </ClInclude>
+    <ClInclude Include="global.h">
+      <Filter>Engine\01. Header</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CCore.cpp">
@@ -256,6 +265,9 @@
     </ClCompile>
     <ClCompile Include="CCamera.cpp">
       <Filter>Engine\03. Manger\Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="CTile.cpp">
+      <Filter>Engine\04. Object\Tile</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

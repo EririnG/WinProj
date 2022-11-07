@@ -3,7 +3,7 @@
 
 #include "framework.h"
 #include "Client.h"
-#include "pch.h"
+#include "global.h"
 #include "CCore.h"
 
 #define MAX_LOADSTRING 100

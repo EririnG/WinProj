@@ -1,5 +1,7 @@
 #pragma once
 
+#include "global.h"
+
 // 전방선언
 class CObject;
 class CTexture;

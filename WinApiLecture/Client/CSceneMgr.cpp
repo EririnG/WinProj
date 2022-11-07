@@ -44,19 +44,6 @@ void CSceneMgr::init()
 
 	// ÇöÀç ¾À ÁöÁ¤
 	m_pCurScene = m_arrScene[(UINT)SCENE_TYPE::START];
-	//m_pTex = m_pCurScene->GetScene();
-	//
-	//int iWidth = (int)m_pTex->Width();
-	//int iHeight = (int)m_pTex->Height();
-	//
-	//m_DC = CCore::GetInst()->GetMainDC();
-
-	//TransparentBlt(m_DC,0,0,
-	//	iWidth,
-	//	iHeight,
-	//	m_pTex->GetDC(),
-	//	0, 0, iWidth, iHeight, RGB(255, 0, 255));
-
 	m_pCurScene->Enter();
 }
 

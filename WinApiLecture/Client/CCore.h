@@ -1,9 +1,10 @@
-//#pragma once
+#pragma once
 //// 싱글톤 패턴
 //// 객체의 생성을 1개로 제한
 //// 어디서든 쉽게 접근 가능
 
 #include "Define.h"
+#include "global.h"
 
 class CCore
 {

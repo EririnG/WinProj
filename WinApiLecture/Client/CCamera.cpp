@@ -10,6 +10,8 @@
 CCamera::CCamera()
 	:	m_pTarjetObj(nullptr)
 	,	m_fTime(1.5f)
+	,	m_fSpeed(0.f)
+	,	m_fAccTime(0.5f)
 {}
 
 CCamera::~CCamera()

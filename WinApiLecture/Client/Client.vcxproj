@@ -120,11 +120,14 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <PrecompiledHeader>Create</PrecompiledHeader>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <MinFilesInUnityFile>8</MinFilesInUnityFile>
-      <UnityFilesDirectory>$(ProjectDir)\Unity\</UnityFilesDirectory>
+      <UnityFilesDirectory>$(ProjectDir)</UnityFilesDirectory>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <AddCodeBeforeSourceInclude>
+      </AddCodeBeforeSourceInclude>
+      <IncludeInUnityFile>true</IncludeInUnityFile>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -139,11 +142,14 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <PrecompiledHeader>Create</PrecompiledHeader>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <MinFilesInUnityFile>8</MinFilesInUnityFile>
-      <UnityFilesDirectory>$(ProjectDir)\Unity\</UnityFilesDirectory>
+      <UnityFilesDirectory>$(ProjectDir)</UnityFilesDirectory>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <AddCodeBeforeSourceInclude>
+      </AddCodeBeforeSourceInclude>
+      <IncludeInUnityFile>true</IncludeInUnityFile>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -175,10 +181,12 @@
     <ClInclude Include="CSceneMgr.h" />
     <ClInclude Include="CSound.h" />
     <ClInclude Include="CTexture.h" />
+    <ClInclude Include="CTile.h" />
     <ClInclude Include="CTimeMgr.h" />
     <ClInclude Include="Define.h" />
     <ClInclude Include="framework.h" />
     <ClInclude Include="func.h" />
+    <ClInclude Include="global.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="SelectGDI.h" />
@@ -207,6 +215,7 @@
     <ClCompile Include="CSceneMgr.cpp" />
     <ClCompile Include="CSound.cpp" />
     <ClCompile Include="CTexture.cpp" />
+    <ClCompile Include="CTile.cpp" />
     <ClCompile Include="CTimeMgr.cpp" />
     <ClCompile Include="func.cpp" />
     <ClCompile Include="main.cpp" />
