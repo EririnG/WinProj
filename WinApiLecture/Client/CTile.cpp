@@ -5,7 +5,7 @@
 
 CTile::CTile()
 	: m_pTileTex(nullptr)
-	, m_iIdx(11)
+	, m_iImgIdx(0)
 {
 	SetScale(Vec2(TILE_SIZE, TILE_SIZE));
 }
@@ -20,7 +20,7 @@ void CTile::update()
 
 void CTile::render(HDC _dc)
 {
-	if (nullptr == m_pTileTex || -1 == m_iIdx)
+	if (nullptr == m_pTileTex || -1 == m_iImgIdx)
 		return;
 
 	UINT iWidth = m_pTileTex->Width();
@@ -29,8 +29,8 @@ void CTile::render(HDC _dc)
 	UINT iMaxCol = iWidth / TILE_SIZE;
 	UINT iMaxRow = iHeight / TILE_SIZE;
 
-	UINT iCurRow = (UINT)m_iIdx / iMaxCol;
-	UINT iCurCol = (UINT)m_iIdx % iMaxCol;
+	UINT iCurRow = (UINT)m_iImgIdx / iMaxCol;
+	UINT iCurCol = (UINT)m_iImgIdx % iMaxCol;
 
 
 	// 이미지 범위를 벗어난 인덱스

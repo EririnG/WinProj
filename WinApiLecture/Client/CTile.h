@@ -9,11 +9,12 @@ class CTile :
 {
 private:
     CTexture*  m_pTileTex;
-    int        m_iIdx;
+    int        m_iImgIdx;
 
 public:
     void SetTexture(CTexture* _pTex) { m_pTileTex = _pTex; }
 
+    void AddImgIdx() { ++m_iImgIdx; }
 private: 
     virtual void update();
     virtual void render(HDC _dc);
