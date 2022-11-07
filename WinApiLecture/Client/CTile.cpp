@@ -34,7 +34,7 @@ void CTile::render(HDC _dc)
 
 
 	// 이미지 범위를 벗어난 인덱스
-	if (iCurRow <= iCurRow)
+	if (iMaxRow <= iCurRow)
 		assert(nullptr);
 
 	Vec2 vRenderPos = CCamera::GetInst()->GetRenderPos(GetPos());
