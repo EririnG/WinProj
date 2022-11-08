@@ -14,6 +14,9 @@
 #include "C:\Users\user\source\repos\EririnG\WinProj\WinApiLecture\Client\CTimeMgr.cpp"
 
 
+#include "C:\Users\user\source\repos\EririnG\WinProj\WinApiLecture\Client\CUI.cpp"
+
+
 #include "C:\Users\user\source\repos\EririnG\WinProj\WinApiLecture\Client\func.cpp"
 
 
