@@ -5,6 +5,9 @@
 #include <assert.h>
 #include <math.h>
 
+#include "list"
+using std::list;
+
 #pragma comment(lib,"Msimg32.lib")
 
 

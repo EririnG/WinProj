@@ -21,7 +21,7 @@ public:
 
 
     void AddChild(CUI* _pUI) { m_vecChildUI.push_back(_pUI); _pUI->m_pParentUI = this; }
-
+    const vector<CUI*>& GetChildUI() {return m_vecChildUI;}
 
 public:
 
