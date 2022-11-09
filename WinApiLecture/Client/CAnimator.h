@@ -22,6 +22,7 @@ public:
 
 	void render(HDC _dc);
 	void update();
+	void finalupdate();
 
 public:
 	CAnimator();

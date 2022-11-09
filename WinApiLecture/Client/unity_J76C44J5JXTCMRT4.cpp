@@ -1,7 +1,4 @@
 
-#include "C:\Users\user\source\repos\EririnG\WinProj\WinApiLecture\Client\CSceneMgr.cpp"
-
-
 #include "C:\Users\user\source\repos\EririnG\WinProj\WinApiLecture\Client\CSound.cpp"
 
 
@@ -15,6 +12,9 @@
 
 
 #include "C:\Users\user\source\repos\EririnG\WinProj\WinApiLecture\Client\CUI.cpp"
+
+
+#include "C:\Users\user\source\repos\EririnG\WinProj\WinApiLecture\Client\CUIMgr.cpp"
 
 
 #include "C:\Users\user\source\repos\EririnG\WinProj\WinApiLecture\Client\func.cpp"

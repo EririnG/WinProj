@@ -25,3 +25,6 @@
 
 #include "C:\Users\user\source\repos\EririnG\WinProj\WinApiLecture\Client\CMissile.cpp"
 
+
+#include "C:\Users\user\source\repos\EririnG\WinProj\WinApiLecture\Client\CMonster.cpp"
+
