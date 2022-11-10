@@ -5,6 +5,9 @@
 #include "C:\Users\user\source\repos\EririnG\WinProj\WinApiLecture\Client\CAnimator.cpp"
 
 
+#include "C:\Users\user\source\repos\EririnG\WinProj\WinApiLecture\Client\CBtnUI.cpp"
+
+
 #include "C:\Users\user\source\repos\EririnG\WinProj\WinApiLecture\Client\CCamera.cpp"
 
 
@@ -24,7 +27,4 @@
 
 
 #include "C:\Users\user\source\repos\EririnG\WinProj\WinApiLecture\Client\CMissile.cpp"
-
-
-#include "C:\Users\user\source\repos\EririnG\WinProj\WinApiLecture\Client\CMonster.cpp"
 

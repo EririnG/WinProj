@@ -1,4 +1,7 @@
 
+#include "C:\Users\user\source\repos\EririnG\WinProj\WinApiLecture\Client\CSceneMgr.cpp"
+
+
 #include "C:\Users\user\source\repos\EririnG\WinProj\WinApiLecture\Client\CSound.cpp"
 
 

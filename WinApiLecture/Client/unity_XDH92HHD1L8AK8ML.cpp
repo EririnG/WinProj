@@ -1,4 +1,7 @@
 
+#include "C:\Users\user\source\repos\EririnG\WinProj\WinApiLecture\Client\CMonster.cpp"
+
+
 #include "C:\Users\user\source\repos\EririnG\WinProj\WinApiLecture\Client\CObject.cpp"
 
 
@@ -24,7 +27,4 @@
 
 
 #include "C:\Users\user\source\repos\EririnG\WinProj\WinApiLecture\Client\CScene_Tool.cpp"
-
-
-#include "C:\Users\user\source\repos\EririnG\WinProj\WinApiLecture\Client\CSceneMgr.cpp"
 
