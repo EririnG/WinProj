@@ -1,10 +1,12 @@
 #pragma once
 #include "CScene.h"
+class CUI;
+
 class CScene_Tool :
     public CScene
 {
 private:
-
+    CUI* m_pUI;
 
 public:
     virtual void Enter();
