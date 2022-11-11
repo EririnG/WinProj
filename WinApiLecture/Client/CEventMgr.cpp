@@ -4,6 +4,7 @@
 #include "CObject.h"
 #include "CScene.h"
 #include "CSceneMgr.h"
+#include "CUIMgr.h"
 
 CEventMgr::CEventMgr()
 {
@@ -61,13 +62,15 @@ void CEventMgr::Excute(const tEvent& _eve)
 		pDeadObj->SetDead();
 		m_vecDead.push_back(pDeadObj);
 	}
-		
-		
-
 		break;
 	case EVENT_TYPE::SCENE_CHANGE:
+	{
 		// lParam : Next Scene Yype
+		// SCENE 변경
 		CSceneMgr::GetInst()->ChangeScene((SCENE_TYPE)_eve.lParam);
+		// 포커스 UI 해제( 이전 Scene의 ui를 가리키고 있기 때문)
+		CUIMgr::GetInst()->SetFocusedUI(nullptr);
+	}
 		break;
 
 	}

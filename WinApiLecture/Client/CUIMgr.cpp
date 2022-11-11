@@ -29,9 +29,9 @@ void CUIMgr::update()
 	// 2. FocusedUI 내에서, 부모 UI 포함, 자식 UI들 중 실제 타겟팅 된 UI를 가져온다.
 	CUI* pTargetUI = GetTargetedUI(m_pFocusedUI);
 
-	bool bLbtnTap = KEY_TAP(KEY::LBTN);
 	bool bLbtnAway = KEY_AWAY(KEY::LBTN);
-
+	bool bLbtnTap = KEY_TAP(KEY::LBTN);
+	
 	if (nullptr != pTargetUI)
 	{
 		pTargetUI->MouseOn();
@@ -77,10 +77,13 @@ void CUIMgr::SetFocusedUI(CUI* _pUI)
 			break;
 		}
 	}
-
-	// 벡터 내에서 맨 뒤로 순번 교체
-	vecUI.erase(iter);
-	vecUI.push_back(m_pFocusedUI);
+	if (0 != vecUI.size())
+	{
+		// 벡터 내에서 맨 뒤로 순번 교체
+		vecUI.erase(iter);
+		vecUI.push_back(m_pFocusedUI);
+	}
+	
 }
 
 
@@ -103,7 +106,7 @@ CUI* CUIMgr::GetFocusedUI()
 	vector<CObject*>::iterator targetiter = vecUI.end();
 	vector<CObject*>::iterator iter = vecUI.begin();
 
-	for (; iter!= vecUI.end(); ++iter)
+	for (; iter != vecUI.end(); ++iter)
 	{
 		if (((CUI*)*iter)->IsMouseOn())
 		{
