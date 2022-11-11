@@ -13,12 +13,17 @@ private:
 
 public:
     void SetTexture(CTexture* _pTex) { m_pTileTex = _pTex; }
-
     void AddImgIdx() { ++m_iImgIdx; }
+
 private: 
     virtual void update();
     virtual void render(HDC _dc);
+
     CLONE(CTile);
+
+public:
+    virtual void Save(FILE* _pFile);
+    virtual void Load(FILE* _pFile);
 
 public:
     CTile();
