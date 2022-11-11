@@ -77,12 +77,12 @@ void CScene_Tool::update()
 	if (KEY_TAP(KEY::LSHIFT))
 	{
 		//CUIMgr::GetInst()->SetFocusedUI(m_pUI);
-		SaveTile(L"tile\\Test.tile");
+		SaveTileData();
 	}
 	if (KEY_TAP(KEY::CTRL))
 	{
 		//CUIMgr::GetInst()->SetFocusedUI(m_pUI);
-		LoadTile(L"tile\\Test.tile");
+		LoadTileData();
 	}
 }
 
@@ -112,15 +112,40 @@ void CScene_Tool::SetTileIdx()
 	}
 }
 
-void CScene_Tool::SaveTile(const wstring& _strRelativePath)
+void CScene_Tool::SaveTileData()
 {
-	wstring strFilePath = CPathMgr::GetInst()->GetContentPath();
-	strFilePath += _strRelativePath;
+	wchar_t szName[256] = {};
 
+	OPENFILENAME ofn = {};
+
+	ofn.lStructSize = sizeof(OPENFILENAME);
+	ofn.hwndOwner = CCore::GetInst()->GetMainHwnd();
+	ofn.lpstrFile = szName;
+	ofn.nMaxFile = sizeof(szName);
+	ofn.lpstrFilter = L"ALL\0*.*\0Tile\0*.tile\0";
+	ofn.nFilterIndex = 0;
+	ofn.lpstrFileTitle = nullptr;
+	ofn.nMaxFileTitle = 0;
+
+	wstring strTileFolder = CPathMgr::GetInst()->GetContentPath();
+	strTileFolder += L"tile";
+
+	ofn.lpstrInitialDir = strTileFolder.c_str();
+	ofn.Flags = OFN_PATHMUSTEXIST | OFN_FILEMUSTEXIST;
+	
+	// Modal
+	if (GetSaveFileName(&ofn)) 
+	{
+		SaveTile(szName);
+	}
+}
+
+void CScene_Tool::SaveTile(const wstring& _strFilePath)
+{
 	// 커널오브젝트
 	FILE* pFile = nullptr;
 
-	_wfopen_s(&pFile,strFilePath.c_str(),L"wb");
+	_wfopen_s(&pFile, _strFilePath.c_str(),L"wb");
 	assert(pFile);
 	
 	// 타일 가로세로 개수 저장
@@ -139,6 +164,35 @@ void CScene_Tool::SaveTile(const wstring& _strRelativePath)
 	}
 
 	fclose(pFile);
+}
+
+void CScene_Tool::LoadTileData()
+{
+	wchar_t szName[256] = {};
+
+	OPENFILENAME ofn = {};
+
+	ofn.lStructSize = sizeof(OPENFILENAME);
+	ofn.hwndOwner = CCore::GetInst()->GetMainHwnd();
+	ofn.lpstrFile = szName;
+	ofn.nMaxFile = sizeof(szName);
+	ofn.lpstrFilter = L"ALL\0*.*\0Tile\0*.tile\0";
+	ofn.nFilterIndex = 0;
+	ofn.lpstrFileTitle = nullptr;
+	ofn.nMaxFileTitle = 0;
+
+	wstring strTileFolder = CPathMgr::GetInst()->GetContentPath();
+	strTileFolder += L"tile";
+
+	ofn.lpstrInitialDir = strTileFolder.c_str();
+	ofn.Flags = OFN_PATHMUSTEXIST | OFN_FILEMUSTEXIST;
+
+	// Modal
+	if (GetOpenFileName(&ofn))
+	{
+		wstring strRelativePath = CPathMgr::GetInst()->GetRelativePath(szName);
+		LoadTile(strRelativePath);
+	}
 }
 
 void ChangeScene(DWORD_PTR, DWORD_PTR)

@@ -33,3 +33,15 @@ void CPathMgr::init()
 
 
 }
+
+wstring CPathMgr::GetRelativePath(const wchar_t* _filepath)
+{
+	wstring strFilePath = _filepath;
+	
+	size_t iAbsLen = wcslen(m_szContentPath);
+	size_t iFullLen = strFilePath.length();
+
+	wstring strRealativePath = strFilePath.substr(iAbsLen, iFullLen- iAbsLen);
+
+	return strRealativePath;
+}
