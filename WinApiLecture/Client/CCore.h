@@ -3,8 +3,7 @@
 //// 객체의 생성을 1개로 제한
 //// 어디서든 쉽게 접근 가능
 
-#include "Define.h"
-#include "global.h"
+class CTexture;
 
 class CCore
 {
@@ -13,8 +12,7 @@ private:
 	POINT	m_ptResolution; // 메인 윈도우 해상도
 	HDC		m_hDC;			// 메인 윈도우에 Draw 할 DC
 
-	HBITMAP m_hBit;
-	HDC		m_memDC;
+	CTexture* m_pMemTex;
 
 	// 자주 사용하는 GDI Object
 	HBRUSH m_arrBrush[(UINT)BRUSH_TYPE::END];

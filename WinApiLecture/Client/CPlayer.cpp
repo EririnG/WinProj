@@ -85,7 +85,7 @@ void CPlayer::render(HDC _dc)
 {
 	// 컴포넌트가 있는경우 렌더
 	component_render(_dc);
-	/*CTexture* pTex =  CResMgr::GetInst()->LoadTexture(L"Plane", L"texture\\player.bmp");
+	CTexture* pTex =  CResMgr::GetInst()->LoadTexture(L"Plane", L"texture\\player.bmp");
 
 	Vec2 vPos = GetPos();
 	vPos = CCamera::GetInst()->GetRenderPos(vPos);
@@ -101,11 +101,11 @@ void CPlayer::render(HDC _dc)
 	bf.SourceConstantAlpha = 255;
 
 	AlphaBlend(_dc
-		, vPos.x - width / 2.f
-		, vPos.y - height / 2.f
-		, width, height
+		, int(vPos.x - width / 2.f)
+		, int(vPos.y - height / 2.f)
+		, int(width), int(height)
 		, pTex->GetDC()
-		, 0, 0, width, height, bf);*/
+		, 0, 0, int(width), int(height), bf);
 
 }
 
