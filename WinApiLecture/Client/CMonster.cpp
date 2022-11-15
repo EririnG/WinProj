@@ -4,6 +4,7 @@
 #include "CScene.h"
 #include "CCollider.h"
 #include "CRes.h"
+#include "AI.h"
 
 #include "CTimeMgr.h"
 #include "CSceneMgr.h"
@@ -11,10 +12,7 @@
 
 
 CMonster::CMonster()
-	: m_vCenterpos(Vec2(0.f, 0.f))
-	, m_fMaxDistance(50.f)
-	, m_fSpeed(100.f)
-	, m_iDir(1)
+	: m_fSpeed(100.f)
 	, m_pTex(nullptr)
 	, m_iHP(5)
 {
@@ -28,6 +26,14 @@ CMonster::CMonster()
 
 CMonster::~CMonster()
 {
+	if (nullptr != m_pAI)
+		delete m_pAI;
+}
+
+void CMonster::SetAI(AI* _AI)
+{
+	m_pAI = _AI;
+	m_pAI->m_pOwner = this;
 }
 
 void CMonster::CreateMissile()
@@ -63,28 +69,7 @@ void CMonster::OnCollisionEnter(CCollider* _pOther)
 
 void CMonster::update()
 {
-	Vec2 vCurPos = GetPos();
-	// 진행 방향으로 시간당 m_fSpeed 만큼 이동
-	vCurPos.x += fDT * m_fSpeed * m_iDir;
-
-	// 배회 거리 기준량을 넘어섰는지 확인
-	float fDist = abs(m_vCenterpos.x-vCurPos.x) - m_fMaxDistance;
-
-	if (0.f < fDist)
-	{
-		// 방향 변경
-		m_iDir *= -1;
-		vCurPos.x += fDist * m_iDir;
-	}
-
-	SetPos(vCurPos);
-
-
-	/*int call = CTimeMgr::GetInst()->GetCallCount();
-	if (call == 2)
-	{
-		CreateMissile();
-	}*/
+	m_pAI->update();
 
 }
 
