@@ -55,6 +55,8 @@ void CScene_Start::Enter()
 	pObj->SetScale(Vec2(100.f,100.f));
 	AddObject(pObj, GROUP_TYPE::PLAYER);
 
+	RegisterPlayer(pObj);
+
 	//CObject* pOtherPlayer = pObj->Clone();
 	//pOtherPlayer->SetPos(Vec2(740.f, 640.f));
 	//AddObject(pOtherPlayer, GROUP_TYPE::PLAYER);
@@ -62,27 +64,11 @@ void CScene_Start::Enter()
 	//CCamera::GetInst()->SetTarget(pObj);
 
 	 //몬스터 배치
-	int iAMon_Count = 5;
-	float fObjScale = 50.f;
 
 	Vec2 vResolution = CCore::GetInst()->GetResolution();
-
-	AI* pAI = new AI;
-	pAI->AddState(new CIdleState);
-	pAI->AddState(new CTraceState);
-
-	CMonster* pAMonsterObj = nullptr;
-	for (int i = 0; i < iAMon_Count; ++i)
-	{
-		// Monster Object 추가
-		pAMonsterObj = new CMonster;
-		pAMonsterObj->SetName(L"Monster");
-		pAMonsterObj->SetScale(Vec2(fObjScale, fObjScale));
-		pAMonsterObj->SetPos(vResolution/2.f-Vec2(0.f,300.f));
-		pAMonsterObj->SetAI(pAI);
-
-		AddObject(pAMonsterObj, GROUP_TYPE::MONSTER);
-	}
+	CMonster* pMon = CMonFactory::CreateMonster(MON_TYPE::NORMAL, vResolution / 2.f - Vec2(0.f, 300.f));
+	AddObject(pMon, GROUP_TYPE::MONSTER);
+	
 
 	// 충돌 지정
 	// Player 그룹과 Monster 그룹 간의 충돌체크

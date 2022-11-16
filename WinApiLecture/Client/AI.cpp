@@ -38,4 +38,20 @@ CState* AI::GetState(MON_STATE _eState)
 	return iter->second;
 }
 
+void AI::SetCurState(MON_STATE _eState)
+{
+	m_pCurState = GetState(_eState);
+	assert(m_pCurState);
+}
+
+void AI::ChangeState(MON_STATE _eNextState)
+{
+	CState* pNextState = GetState(_eNextState);
+	assert(pNextState != m_pCurState);
+
+	m_pCurState->Exit();
+	m_pCurState = pNextState;
+	m_pCurState->Enter();
+}
+
 

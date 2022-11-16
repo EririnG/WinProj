@@ -12,9 +12,8 @@
 
 
 CMonster::CMonster()
-	: m_fSpeed(100.f)
-	, m_pTex(nullptr)
-	, m_iHP(5)
+	: m_pTex(nullptr)
+	
 {
 	m_pTex = CResMgr::GetInst()->LoadTexture(L"MonsterTex", L"texture\\monster.bmp");
 	
@@ -57,11 +56,7 @@ void CMonster::OnCollisionEnter(CCollider* _pOther)
 	
 	if (pOtherObj->GetName() == L"Missile_Player")
 	{
-		m_iHP -= 1;
-		if (0 >= m_iHP)
-		{
-			DeleteObject(this);
-		}
+		
 	}
 
 	
@@ -70,7 +65,6 @@ void CMonster::OnCollisionEnter(CCollider* _pOther)
 void CMonster::update()
 {
 	m_pAI->update();
-
 }
 
 void CMonster::render(HDC _dc)
