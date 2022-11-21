@@ -11,6 +11,8 @@
 #include "CUIMgr.h"
 #include "CResMgr.h"
 #include "CTexture.h"
+#include "SelectGDI.h"
+#include "resource.h"
 
 CCore::CCore()
 	: m_hWnd(0)
@@ -30,6 +32,7 @@ CCore::~CCore()
 		DeleteObject(m_arrPen[i]);
 	}
 
+	DestroyMenu(m_hMenu);
 }
 
 int CCore::init(HWND _hWnd, POINT _ptResolution)
@@ -38,9 +41,11 @@ int CCore::init(HWND _hWnd, POINT _ptResolution)
 	m_ptResolution = _ptResolution;
 	
 	//해상도에 맞게 윈도우 크기 조정
-	RECT rt = {0,0,m_ptResolution.x,m_ptResolution.y};
-	AdjustWindowRect(&rt, WS_OVERLAPPEDWINDOW,true);
-	SetWindowPos(m_hWnd,nullptr, 100,100 , rt.right-rt.left,rt.bottom - rt.top,0);
+	ChangeWindowSize(Vec2((float)_ptResolution.x, (float)_ptResolution.y), false);
+
+	// 메뉴바 생성
+
+	m_hMenu = LoadMenu(nullptr, MAKEINTRESOURCEW(IDC_CLIENT));
 
 	m_hDC = GetDC(m_hWnd);
 
@@ -92,7 +97,7 @@ void CCore::Progress()
 	//Rendering
 	//=========
 	//화면 Clear
-	Rectangle(m_pMemTex->GetDC(), -1, -1, m_ptResolution.x + 1, m_ptResolution.y + 1);
+	Clear();
 	
 	CSceneMgr::GetInst()->render(m_pMemTex->GetDC());
 	CCamera::GetInst()->render(m_pMemTex->GetDC());
@@ -110,15 +115,40 @@ void CCore::Progress()
 	CEventMgr::GetInst()->update();
 }
 
+void CCore::Clear()
+{
+	SelectGDI gdi(m_pMemTex->GetDC(), BRUSH_TYPE::BLACK);
+	Rectangle(m_pMemTex->GetDC(), -1, -1, m_ptResolution.x + 1, m_ptResolution.y + 1);
+}
+
 void CCore::CreateBrushPen()
 {
 	// hollow brush
 	m_arrBrush[(UINT)BRUSH_TYPE::HOLLOW] = (HBRUSH)GetStockObject(HOLLOW_BRUSH);
-
+	m_arrBrush[(UINT)BRUSH_TYPE::BLACK] = (HBRUSH)GetStockObject(BLACK_BRUSH);
 	// red blue green pen
 	m_arrPen[(UINT)PEN_TYPE::RED] = CreatePen(PS_SOLID, 1, RGB(255, 0, 0));
 	m_arrPen[(UINT)PEN_TYPE::GREEN] = CreatePen(PS_SOLID, 1, RGB(0, 255, 0));
 	m_arrPen[(UINT)PEN_TYPE::BLUE] = CreatePen(PS_SOLID, 1, RGB(0,0,255));
 
+}
+
+void CCore::DockMenu()
+{
+	SetMenu(m_hWnd, m_hMenu);
+	ChangeWindowSize(GetResolution(), true);
+}
+
+void CCore::DivideMenu()
+{
+	SetMenu(m_hWnd, nullptr);
+	ChangeWindowSize(GetResolution(), false);
+}
+
+void CCore::ChangeWindowSize(Vec2 _vResolution, bool _bMenu)
+{
+	RECT rt = { 0,0,(long)_vResolution.x,(long)_vResolution.y};
+	AdjustWindowRect(&rt, WS_OVERLAPPEDWINDOW, _bMenu);
+	SetWindowPos(m_hWnd, nullptr, 100, 100, rt.right - rt.left, rt.bottom - rt.top, 0);
 }
 

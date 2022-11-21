@@ -13,6 +13,7 @@
 CScene::CScene()
 	: m_iTileX(0)
 	, m_iTileY(0)
+	, m_pPlayer(nullptr)
 {
 }
 
@@ -98,6 +99,7 @@ void CScene::render_tile(HDC _dc)
 
 	int iClientWidth = ((int)vResolution.x / iTileSize) + 1;
 	int iClientHeight = ((int)vResolution.y / iTileSize) + 1;
+
 
 	for (int iCurRow = iLTRow; iCurRow < (iLTRow + iClientHeight); ++iCurRow)
 	{
