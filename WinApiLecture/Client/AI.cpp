@@ -18,7 +18,7 @@ AI::~AI()
 
 void AI::update()
 {
-	m_pCurState->Enter();
+	m_pCurState->update();
 }
 
 void AI::AddState(CState* _pState)
@@ -47,7 +47,7 @@ void AI::SetCurState(MON_STATE _eState)
 void AI::ChangeState(MON_STATE _eNextState)
 {
 	CState* pNextState = GetState(_eNextState);
-	assert(pNextState != m_pCurState);
+	assert(m_pCurState != pNextState);
 
 	m_pCurState->Exit();
 	m_pCurState = pNextState;

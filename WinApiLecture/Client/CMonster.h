@@ -15,9 +15,6 @@ struct tMonInfo
 };
 
 
-
-
-
 class CMonster:
 	public CObject
 {

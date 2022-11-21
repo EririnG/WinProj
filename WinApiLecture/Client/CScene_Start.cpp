@@ -6,6 +6,7 @@
 #include "CMonster.h"
 #include "CCamera.h"
 #include "AI.h"
+#include "CState.h"
 #include "CIdleState.h"
 #include "CTraceState.h"
 

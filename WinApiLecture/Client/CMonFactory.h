@@ -18,7 +18,7 @@ public:
 
 
 private:
-	CMonFactory();
-	~CMonFactory();
+	CMonFactory() {}
+	~CMonFactory() {}
 };
 

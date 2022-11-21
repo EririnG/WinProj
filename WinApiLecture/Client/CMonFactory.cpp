@@ -7,6 +7,7 @@
 #include "CIdleState.h"
 #include "CTraceState.h"
 
+
 CMonster* CMonFactory::CreateMonster(MON_TYPE _eType, Vec2 _vPos)
 {
 	CMonster* pMon = nullptr;
@@ -34,7 +35,6 @@ CMonster* CMonFactory::CreateMonster(MON_TYPE _eType, Vec2 _vPos)
 
 		pMon->SetAI(pAI);
 	}
-
 		break;
 	case MON_TYPE::RANGE:
 		break;

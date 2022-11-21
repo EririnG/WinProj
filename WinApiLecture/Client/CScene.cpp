@@ -100,6 +100,7 @@ void CScene::render_tile(HDC _dc)
 	int iClientWidth = ((int)vResolution.x / iTileSize) + 1;
 	int iClientHeight = ((int)vResolution.y / iTileSize) + 1;
 
+
 	for (int iCurRow = iLTRow; iCurRow < (iLTRow + iClientHeight); ++iCurRow)
 	{
 		for (int iCurCol = iLTCol; iCurCol < (iLTCol + iClientWidth); ++iCurCol)

@@ -13,7 +13,8 @@
 
 CMonster::CMonster()
 	: m_pTex(nullptr)
-	
+	, m_pAI(nullptr)
+	, m_tInfo{}
 {
 	m_pTex = CResMgr::GetInst()->LoadTexture(L"MonsterTex", L"texture\\monster.bmp");
 	
@@ -29,11 +30,6 @@ CMonster::~CMonster()
 		delete m_pAI;
 }
 
-void CMonster::SetAI(AI* _AI)
-{
-	m_pAI = _AI;
-	m_pAI->m_pOwner = this;
-}
 
 void CMonster::CreateMissile()
 {
@@ -66,6 +62,13 @@ void CMonster::update()
 {
 	m_pAI->update();
 }
+
+void CMonster::SetAI(AI* _AI)
+{
+	m_pAI = _AI;
+	m_pAI->m_pOwner = this;
+}
+
 
 void CMonster::render(HDC _dc)
 {

@@ -4,6 +4,7 @@
 #include "CObject.h"
 #include "CScene.h"
 #include "AI.h"
+#include "CState.h"
 
 #include "CSceneMgr.h"
 #include "CUIMgr.h"
@@ -76,12 +77,13 @@ void CEventMgr::Excute(const tEvent& _eve)
 	}
 		break;
 	case EVENT_TYPE::CHANGE_AI_STATE:
+	{
 		// lParam : AI
 		// wParam : Next Type
 		AI* pAI = (AI*)_eve.lParam;
 		MON_STATE eNextState = (MON_STATE)_eve.wParam;
 		pAI->ChangeState(eNextState);
-
+	}
 		break;
 	}
 		
