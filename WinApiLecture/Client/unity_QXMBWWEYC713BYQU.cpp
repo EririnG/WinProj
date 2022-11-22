@@ -5,6 +5,9 @@
 #include "C:\Users\user\source\repos\EririnG\WinProj\WinApiLecture\Client\CResMgr.cpp"
 
 
+#include "C:\Users\user\source\repos\EririnG\WinProj\WinApiLecture\Client\CRigidBody.cpp"
+
+
 #include "C:\Users\user\source\repos\EririnG\WinProj\WinApiLecture\Client\CScene.cpp"
 
 
@@ -21,7 +24,4 @@
 
 
 #include "C:\Users\user\source\repos\EririnG\WinProj\WinApiLecture\Client\CState.cpp"
-
-
-#include "C:\Users\user\source\repos\EririnG\WinProj\WinApiLecture\Client\CTexture.cpp"
 
