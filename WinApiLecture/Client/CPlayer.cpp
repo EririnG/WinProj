@@ -17,6 +17,8 @@
 
 CPlayer::CPlayer()
 	: m_pTex(nullptr)
+	, m_eCurState(PLAYER_STATE::IDLE)
+	, m_iDir(1)
 {
 	//_pTex = CResMgr::GetInst()->LoadTexture(L"PlayerTex", L"texture\\link_0.bmp");
 	
@@ -28,9 +30,20 @@ CPlayer::CPlayer()
 	CreateRigidBody();
 
 	// Texture 로딩하기
+	//CTexture* pLeftTex = CResMgr::GetInst()->LoadTexture(L"PlayerLeft", L"texture\\Player01_L.bmp");
+	//CTexture* pRightTex = CResMgr::GetInst()->LoadTexture(L"PlayerRight", L"texture\\Player02_R.bmp");
 	CTexture* pTex = CResMgr::GetInst()->LoadTexture(L"PlayerTex", L"texture\\link_0.bmp");
 	CreateAnimator();
-	GetAnimator()->CreateAnimation(L"WALK_DOWN", pTex, Vec2(0.f, 260.f), Vec2(60.f, 65.f), Vec2(60.f, 0.f),0.07f, 10);
+	
+	GetAnimator()->CreateAnimation(L"IDLE", pTex, Vec2(0.f, 0.f), Vec2(60, 65), Vec2(60.f, 0.f), 0.1f, 3);
+	GetAnimator()->CreateAnimation(L"IDLE_LEFT", pTex, Vec2(0.f, 65.f), Vec2(60, 65), Vec2(60.f, 0.f), 0.1f, 3);
+	GetAnimator()->CreateAnimation(L"IDLE_RIGHT", pTex, Vec2(0.f, 195.f), Vec2(60, 65), Vec2(60.f, 0.f), 0.1f, 3);
+	GetAnimator()->CreateAnimation(L"IDLE_BEHIND", pTex, Vec2(0.f, 130.f), Vec2(60, 65), Vec2(60.f, 0.f), 0.1f, 1);
+
+	GetAnimator()->CreateAnimation(L"WALK_LEFT", pTex, Vec2(0.f, 325.f), Vec2(60.f, 65.f), Vec2(60.f, 0.f), 0.1f, 10);
+	GetAnimator()->CreateAnimation(L"WALK_RIGHT", pTex, Vec2(0.f, 455.f), Vec2(60.f, 65.f), Vec2(60.f, 0.f), 0.1f, 10);
+	GetAnimator()->CreateAnimation(L"WALK_DOWN", pTex, Vec2(0.f, 260.f), Vec2(60.f, 65.f), Vec2(60.f, 0.f),0.1f, 10);
+	GetAnimator()->CreateAnimation(L"WALK_UP", pTex, Vec2(0.f, 390.f), Vec2(60.f, 65.f), Vec2(60.f, 0.f), 0.1f, 10);
 
 	GetAnimator()->Play(L"WALK_DOWN",true);
 
@@ -50,45 +63,15 @@ CPlayer::~CPlayer()
 
 void CPlayer::update()
 {
-	CRigidBody* pRigid = GetRigidBody();
+	m_ePrevState = m_eCurState;
+
+	update_move();
+
+	update_state();
 	
-
-	if (KEY_TAP(KEY::W))
-	{
-		pRigid->AddVelocity(Vec2(0.f, -100.f));
-	}
-	if (KEY_TAP(KEY::S))
-	{
-		pRigid->AddVelocity(Vec2(0.f, 100.f));
-	}
-	if (KEY_TAP(KEY::A))
-	{
-		pRigid->AddVelocity(Vec2(-100.f, 0.f));
-	}
-	if (KEY_TAP(KEY::D))
-	{
-		pRigid->AddVelocity(Vec2(100.f, 0.f));
-	}
+	update_animation();
 
 
-	if (KEY_HOLD(KEY::W))
-	{
-		pRigid->AddForce(Vec2(0.f,-200.f));
-		
-	}
-	if (KEY_HOLD(KEY::S))
-	{
-		pRigid->AddForce(Vec2(0.f, 200.f));
-	}
-	if (KEY_HOLD(KEY::A))
-	{
-		pRigid->AddForce(Vec2(-200.f, 0.f));
-	}
-
-	if (KEY_HOLD(KEY::D))
-	{
-		pRigid->AddForce(Vec2(200.f, 0.f));
-	}
 
 	if (KEY_TAP(KEY::SPACE))
 	{
@@ -117,4 +100,92 @@ void CPlayer::CreateMissile()
 	pMissile->SetDir(Vec2(0.f, -7.f));
 
 	CreateObject(pMissile,GROUP_TYPE::PROJ_PLAYER);
+}
+
+void CPlayer::update_state()
+{
+	if (KEY_TAP(KEY::W))
+	{
+		
+	}
+	if (KEY_TAP(KEY::S))
+	{
+		
+	}
+	if (KEY_TAP(KEY::A))
+	{
+		m_iDir = -1;
+		m_eCurState = PLAYER_STATE::WALK;
+	}
+	if (KEY_TAP(KEY::D))
+	{
+		m_iDir = 1;
+		m_eCurState = PLAYER_STATE::WALK;
+	}
+}
+
+void CPlayer::update_move()
+{
+	CRigidBody* pRigid = GetRigidBody();
+
+	if (KEY_TAP(KEY::W))
+	{
+		pRigid->AddVelocity(Vec2(0.f, -100.f));
+	}
+	if (KEY_TAP(KEY::S))
+	{
+		pRigid->AddVelocity(Vec2(0.f, 100.f));
+	}
+	if (KEY_TAP(KEY::A))
+	{
+		pRigid->AddVelocity(Vec2(-100.f, 0.f));
+	}
+	if (KEY_TAP(KEY::D))
+	{
+		pRigid->AddVelocity(Vec2(100.f, 0.f));
+	}
+
+
+	if (KEY_HOLD(KEY::W))
+	{
+		pRigid->AddForce(Vec2(0.f, -200.f));
+
+	}
+	if (KEY_HOLD(KEY::S))
+	{
+		pRigid->AddForce(Vec2(0.f, 200.f));
+	}
+	if (KEY_HOLD(KEY::A))
+	{
+		pRigid->AddForce(Vec2(-200.f, 0.f));
+	}
+
+	if (KEY_HOLD(KEY::D))
+	{
+		pRigid->AddForce(Vec2(200.f, 0.f));
+	}
+}
+
+void CPlayer::update_animation()
+{
+	if (m_eCurState == m_ePrevState)
+		return;
+
+	switch (m_eCurState)
+	{
+	case PLAYER_STATE::IDLE:
+
+		break;
+	case PLAYER_STATE::WALK:
+
+		break;
+	case PLAYER_STATE::ATTACK:
+
+		break;
+	case PLAYER_STATE::DEAD:
+
+		break;
+	default:
+		break;
+	}
 }
