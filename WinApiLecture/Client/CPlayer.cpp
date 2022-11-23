@@ -18,7 +18,9 @@
 CPlayer::CPlayer()
 	: m_pTex(nullptr)
 	, m_eCurState(PLAYER_STATE::IDLE)
+	, m_ePrevState(PLAYER_STATE::WALK)
 	, m_iDir(1)
+	, m_iPrevDir(1)
 {
 	//_pTex = CResMgr::GetInst()->LoadTexture(L"PlayerTex", L"texture\\link_0.bmp");
 	
@@ -35,17 +37,17 @@ CPlayer::CPlayer()
 	CTexture* pTex = CResMgr::GetInst()->LoadTexture(L"PlayerTex", L"texture\\link_0.bmp");
 	CreateAnimator();
 	
-	GetAnimator()->CreateAnimation(L"IDLE", pTex, Vec2(0.f, 0.f), Vec2(60, 65), Vec2(60.f, 0.f), 0.1f, 3);
+	GetAnimator()->CreateAnimation(L"IDLE_DOWN", pTex, Vec2(0.f, 0.f), Vec2(60, 65), Vec2(60.f, 0.f), 0.1f, 3);
 	GetAnimator()->CreateAnimation(L"IDLE_LEFT", pTex, Vec2(0.f, 65.f), Vec2(60, 65), Vec2(60.f, 0.f), 0.1f, 3);
 	GetAnimator()->CreateAnimation(L"IDLE_RIGHT", pTex, Vec2(0.f, 195.f), Vec2(60, 65), Vec2(60.f, 0.f), 0.1f, 3);
-	GetAnimator()->CreateAnimation(L"IDLE_BEHIND", pTex, Vec2(0.f, 130.f), Vec2(60, 65), Vec2(60.f, 0.f), 0.1f, 1);
+	GetAnimator()->CreateAnimation(L"IDLE_UP", pTex, Vec2(0.f, 130.f), Vec2(60, 65), Vec2(60.f, 0.f), 0.1f, 1);
 
 	GetAnimator()->CreateAnimation(L"WALK_LEFT", pTex, Vec2(0.f, 325.f), Vec2(60.f, 65.f), Vec2(60.f, 0.f), 0.1f, 10);
 	GetAnimator()->CreateAnimation(L"WALK_RIGHT", pTex, Vec2(0.f, 455.f), Vec2(60.f, 65.f), Vec2(60.f, 0.f), 0.1f, 10);
 	GetAnimator()->CreateAnimation(L"WALK_DOWN", pTex, Vec2(0.f, 260.f), Vec2(60.f, 65.f), Vec2(60.f, 0.f),0.1f, 10);
 	GetAnimator()->CreateAnimation(L"WALK_UP", pTex, Vec2(0.f, 390.f), Vec2(60.f, 65.f), Vec2(60.f, 0.f), 0.1f, 10);
 
-	GetAnimator()->Play(L"WALK_DOWN",true);
+	GetAnimator()->Play(L"IDLE_DOWN",true);
 
 	CAnimation* pAnim = GetAnimator()->FindAnimation(L"WALK_DOWN");
 	for (UINT i = 0; i < pAnim->GetMaxFrame(); ++i)
@@ -63,7 +65,6 @@ CPlayer::~CPlayer()
 
 void CPlayer::update()
 {
-	m_ePrevState = m_eCurState;
 
 	update_move();
 
@@ -79,6 +80,10 @@ void CPlayer::update()
 	}
 
 	GetAnimator()->update();
+
+	m_ePrevState = m_eCurState;
+	m_iPrevDir = m_iDir;
+	
 }
 
 void CPlayer::render(HDC _dc)
@@ -104,38 +109,54 @@ void CPlayer::CreateMissile()
 
 void CPlayer::update_state()
 {
-	if (KEY_TAP(KEY::W))
-	{
-		
-	}
-	if (KEY_TAP(KEY::S))
-	{
-		
-	}
+	//if (KEY_TAP(KEY::W))
+	//{
+	//	m_iDir = Vec2(0.f, 0.f);
+	//	m_vDir.y = -1;
+	//	m_eCurState = PLAYER_STATE::WALK;
+	//}
+	//if (KEY_TAP(KEY::S))
+	//{
+	//	//m_vDir = Vec2(0.f, 0.f);
+	//	m_vDir.y = 1;
+	//	m_eCurState = PLAYER_STATE::WALK;
+	//}
 	if (KEY_TAP(KEY::A))
 	{
+		//m_vDir = Vec2(0.f, 0.f);
+		//m_vDir.x = -1;
 		m_iDir = -1;
 		m_eCurState = PLAYER_STATE::WALK;
 	}
 	if (KEY_TAP(KEY::D))
 	{
+		//m_vDir = Vec2(0.f, 0.f);
+		//m_vDir.x = 1;
 		m_iDir = 1;
 		m_eCurState = PLAYER_STATE::WALK;
 	}
+
+	if (0.f == GetRigidBody()->GetSpeed())
+	{
+		m_eCurState = PLAYER_STATE::IDLE;
+	}
+
+
+
 }
 
 void CPlayer::update_move()
 {
 	CRigidBody* pRigid = GetRigidBody();
 
-	if (KEY_TAP(KEY::W))
-	{
-		pRigid->AddVelocity(Vec2(0.f, -100.f));
-	}
-	if (KEY_TAP(KEY::S))
-	{
-		pRigid->AddVelocity(Vec2(0.f, 100.f));
-	}
+	//if (KEY_TAP(KEY::W))
+	//{
+	//	pRigid->AddVelocity(Vec2(0.f, -100.f));
+	//}
+	//if (KEY_TAP(KEY::S))
+	//{
+	//	pRigid->AddVelocity(Vec2(0.f, 100.f));
+	//}
 	if (KEY_TAP(KEY::A))
 	{
 		pRigid->AddVelocity(Vec2(-100.f, 0.f));
@@ -146,15 +167,15 @@ void CPlayer::update_move()
 	}
 
 
-	if (KEY_HOLD(KEY::W))
-	{
-		pRigid->AddForce(Vec2(0.f, -200.f));
+	//if (KEY_HOLD(KEY::W))
+	//{
+	//	pRigid->AddForce(Vec2(0.f, -200.f));
 
-	}
-	if (KEY_HOLD(KEY::S))
-	{
-		pRigid->AddForce(Vec2(0.f, 200.f));
-	}
+	//}
+	//if (KEY_HOLD(KEY::S))
+	//{
+	//	pRigid->AddForce(Vec2(0.f, 200.f));
+	//}
 	if (KEY_HOLD(KEY::A))
 	{
 		pRigid->AddForce(Vec2(-200.f, 0.f));
@@ -168,16 +189,45 @@ void CPlayer::update_move()
 
 void CPlayer::update_animation()
 {
-	if (m_eCurState == m_ePrevState)
+	if (m_eCurState == m_ePrevState && m_iPrevDir == m_iDir)
 		return;
 
 	switch (m_eCurState)
 	{
 	case PLAYER_STATE::IDLE:
+	{
+		//if (1 == m_vDir.y)
+		//	GetAnimator()->Play(L"IDLE_DOWN", true);
+		//else if(-1 == m_vDir.x)
+		//	GetAnimator()->Play(L"IDLE_LEFT", true);
+		//else if (1 == m_vDir.x )
+		//	GetAnimator()->Play(L"IDLE_RIGHT", true);
+		//else if(-1 == m_vDir.y)
+		//	GetAnimator()->Play(L"IDLE_UP", true);
+		if (1 == m_iDir)
+			GetAnimator()->Play(L"IDLE_RIGHT", true);
+		else if (-1 == m_iDir)
+			GetAnimator()->Play(L"IDLE_LEFT", true);
+
+	}
 
 		break;
 	case PLAYER_STATE::WALK:
+	{
+		//if (1 == m_vDir.y)
+		//	GetAnimator()->Play(L"WALK_DOWN", true);
+		//else if (-1 == m_vDir.x)
+		//	GetAnimator()->Play(L"WALK_LEFT", true);
+		//else if (1 == m_vDir.x)
+		//	GetAnimator()->Play(L"WALK_RIGHT", true);
+		//else if (-1 == m_vDir.y)
+		//	GetAnimator()->Play(L"WALK_UP", true);
+		if (1 == m_iDir)
+			GetAnimator()->Play(L"WALK_RIGHT", true);
+		else if (-1 == m_iDir)
+			GetAnimator()->Play(L"WALK_LEFT", true);
 
+	}
 		break;
 	case PLAYER_STATE::ATTACK:
 
@@ -188,4 +238,9 @@ void CPlayer::update_animation()
 	default:
 		break;
 	}
+}
+
+void CPlayer::update_gravity()
+{
+	GetRigidBody()->AddForce(Vec2(0.f,500.f));
 }

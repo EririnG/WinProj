@@ -46,7 +46,13 @@ public:
 		x += _vOther.x;
 		y += _vOther.y;
 	}
-	
+	bool operator == (Vec2 _vOther)
+	{
+		if (x == _vOther.x && y == _vOther.y)
+			return 1;
+		else
+			return 0;
+	}
 
 
 	Vec2 operator + (Vec2 _vOther)

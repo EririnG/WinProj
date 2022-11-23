@@ -29,6 +29,7 @@ public:
 	void AddForce(Vec2 _vF) { m_vForce += _vF; }
 	void SetMass(float _fMass) { m_fMass = _fMass; }
 	float GetMass() { return m_fMass; }
+	float GetSpeed() { return m_vVelocity.Length(); }
 
 	void SetVelocity(Vec2 _v) { m_vVelocity = _v; }
 	void AddVelocity(Vec2 _v) { m_vVelocity += _v; }

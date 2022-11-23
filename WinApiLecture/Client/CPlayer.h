@@ -29,6 +29,7 @@ private:
 	PLAYER_STATE		m_eCurState;
 	PLAYER_STATE		m_ePrevState;
 	int					m_iDir;
+	int					m_iPrevDir;
 
 public:
 	virtual void update();
@@ -39,6 +40,7 @@ private:
 	void update_state();
 	void update_move();
 	void update_animation();
+	void update_gravity();
 
 	CLONE(CPlayer);
 public:
