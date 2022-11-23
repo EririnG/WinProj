@@ -35,7 +35,6 @@ void CScene::start()
 		for (size_t j = 0; j < m_arrObj[i].size(); ++j)
 		{
 			m_arrObj[i][j]->start();
-
 		}
 	}
 }

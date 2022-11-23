@@ -37,6 +37,7 @@ public:
 	CCollider* GetCollider() { return m_pCollider; }
 	CAnimator* GetAnimator() { return m_pAnimator; }
 	CRigidBody* GetRigidBody() { return m_pRigidBody; }
+	CGravity* GetGravity() { return m_pGravity; }
 
 	bool IsDead() { return !m_bAlive; }
 

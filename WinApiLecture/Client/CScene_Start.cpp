@@ -117,6 +117,7 @@ void CScene_Start::Enter()
 {
 	// Object Ãß°¡
 	CObject* pObj = new CPlayer;
+	pObj->SetName(L"Player");
 	pObj->SetPos(Vec2(640.f,450.f));
 	pObj->SetScale(Vec2(100.f,100.f));
 	AddObject(pObj, GROUP_TYPE::PLAYER);
