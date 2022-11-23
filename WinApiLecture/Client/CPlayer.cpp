@@ -14,6 +14,7 @@
 #include "CAnimator.h"
 #include "CAnimation.h"
 #include "CRigidBody.h"
+#include "CGravity.h"
 
 CPlayer::CPlayer()
 	: m_pTex(nullptr)
@@ -26,8 +27,8 @@ CPlayer::CPlayer()
 	
 	
 	CreateCollider();
-	GetCollider()->SetOffsetPos(Vec2(1.f, 0.f));
-	GetCollider()->SetScale(Vec2(10.f, 40.f));
+	GetCollider()->SetOffsetPos(Vec2(0.f, 5.f));
+	GetCollider()->SetScale(Vec2(20.f, 55.f));
 
 	CreateRigidBody();
 
@@ -49,11 +50,12 @@ CPlayer::CPlayer()
 
 	GetAnimator()->Play(L"IDLE_DOWN",true);
 
-	CAnimation* pAnim = GetAnimator()->FindAnimation(L"WALK_DOWN");
-	for (UINT i = 0; i < pAnim->GetMaxFrame(); ++i)
-	{
-		pAnim->GetFrame(i).vOffset = Vec2(0.f, -20.f);
-	}
+	CreateGravity();
+	//CAnimation* pAnim = GetAnimator()->FindAnimation(L"WALK_DOWN");
+	//for (UINT i = 0; i < pAnim->GetMaxFrame(); ++i)
+	//{
+	//	pAnim->GetFrame(i).vOffset = Vec2(0.f, -20.f);
+	//}
 	
 }
 
@@ -80,7 +82,7 @@ void CPlayer::update()
 	}
 
 	GetAnimator()->update();
-
+	
 	m_ePrevState = m_eCurState;
 	m_iPrevDir = m_iDir;
 	
@@ -121,6 +123,7 @@ void CPlayer::update_state()
 	//	m_vDir.y = 1;
 	//	m_eCurState = PLAYER_STATE::WALK;
 	//}
+
 	if (KEY_TAP(KEY::A))
 	{
 		//m_vDir = Vec2(0.f, 0.f);
@@ -135,6 +138,8 @@ void CPlayer::update_state()
 		m_iDir = 1;
 		m_eCurState = PLAYER_STATE::WALK;
 	}
+
+
 
 	if (0.f == GetRigidBody()->GetSpeed())
 	{

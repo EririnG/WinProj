@@ -6,6 +6,7 @@
 class CCollider;
 class CAnimator;
 class CRigidBody;
+class CGravity;
 
 class CObject
 {
@@ -19,6 +20,7 @@ private:
 	CCollider*  m_pCollider;
 	CAnimator*	m_pAnimator;
 	CRigidBody* m_pRigidBody;
+	CGravity*	m_pGravity;
 
 	bool		m_bAlive;
 
@@ -41,6 +43,7 @@ public:
 	void CreateCollider();
 	void CreateAnimator();
 	void CreateRigidBody();
+	void CreateGravity();
 
 	virtual void OnCollision(CCollider* _pOther) {}
 	virtual void OnCollisionEnter(CCollider* _pOther) {}
@@ -51,6 +54,7 @@ private:
 
 
 public:
+	virtual void start() {};	// Scene 이 시작되기 직전에 호출되는 함수
 	virtual void update() = 0;
 	virtual void finalupdate();
 	virtual void render(HDC _dc);

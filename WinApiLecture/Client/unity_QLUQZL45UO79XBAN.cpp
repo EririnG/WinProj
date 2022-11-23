@@ -25,3 +25,6 @@
 
 #include "C:\Users\user\source\repos\EririnG\WinProj\WinApiLecture\Client\CEventMgr.cpp"
 
+
+#include "C:\Users\user\source\repos\EririnG\WinProj\WinApiLecture\Client\CGravity.cpp"
+

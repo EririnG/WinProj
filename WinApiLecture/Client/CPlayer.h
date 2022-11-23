@@ -6,6 +6,7 @@ enum class PLAYER_STATE
 	IDLE,
 	WALK,
 	ATTACK,
+	JUMP,
 	DEAD,
 };
 

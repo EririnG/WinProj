@@ -1,7 +1,4 @@
 
-#include "C:\Users\user\source\repos\EririnG\WinProj\WinApiLecture\Client\CTexture.cpp"
-
-
 #include "C:\Users\user\source\repos\EririnG\WinProj\WinApiLecture\Client\CTile.cpp"
 
 

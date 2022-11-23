@@ -1,4 +1,7 @@
 
+#include "C:\Users\user\source\repos\EririnG\WinProj\WinApiLecture\Client\CGround.cpp"
+
+
 #include "C:\Users\user\source\repos\EririnG\WinProj\WinApiLecture\Client\CIdleState.cpp"
 
 

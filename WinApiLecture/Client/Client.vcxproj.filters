@@ -131,6 +131,12 @@
     <Filter Include="Engine\07. Conponent\RigidBody">
       <UniqueIdentifier>{deee778a-352a-48c5-86ba-da9433bfb032}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Engine\07. Conponent\Gravity">
+      <UniqueIdentifier>{36c328d8-78b1-4ed7-9f26-316b6dc573ce}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\04. Object\Ground">
+      <UniqueIdentifier>{431f5b17-670b-455d-9c14-c7627a8cc273}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CCore.h">
@@ -260,6 +266,8 @@
     <ClInclude Include="CRigidBody.h">
       <Filter>Engine\07. Conponent\RigidBody</Filter>
     </ClInclude>
+    <ClInclude Include="CGravity.h" />
+    <ClInclude Include="CGround.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CCore.cpp">
@@ -368,6 +376,8 @@
     <ClCompile Include="CRigidBody.cpp">
       <Filter>Engine\07. Conponent\RigidBody</Filter>
     </ClCompile>
+    <ClCompile Include="CGravity.cpp" />
+    <ClCompile Include="CGround.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Client.rc">
