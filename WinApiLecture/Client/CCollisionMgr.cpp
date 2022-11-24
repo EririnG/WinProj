@@ -15,7 +15,9 @@ CCollisionMgr::CCollisionMgr()
 }
 
 CCollisionMgr::~CCollisionMgr()
-{}
+{
+
+}
 
 
 void CCollisionMgr::update()
@@ -36,9 +38,15 @@ void CCollisionMgr::update()
 void CCollisionMgr::CollisionGroupUpdate(GROUP_TYPE _eLeft, GROUP_TYPE _eRight)
 {
 	CScene* pCurScene = CSceneMgr::GetInst()->GetCurScene();
-
+	if (_eLeft > _eRight)
+	{
+		UINT temp  = UINT(_eRight);
+		_eRight = _eLeft;
+		_eLeft = (GROUP_TYPE)temp;
+	}
 	const vector<CObject*>& vecLeft = pCurScene->GetGroupObject(_eLeft);
 	const vector<CObject*>& vecRight = pCurScene->GetGroupObject(_eRight);
+	map < ULONGLONG, bool>::iterator iter;
 
 	for (size_t i = 0; i < vecLeft.size(); ++i)
 	{ 
@@ -65,7 +73,7 @@ void CCollisionMgr::CollisionGroupUpdate(GROUP_TYPE _eLeft, GROUP_TYPE _eRight)
 			ID.Left_id = pLeftCol->GetID();
 			ID.Right_id = pRighttCol->GetID();
 
-			map < ULONGLONG, bool>::iterator iter = m_mapColInfo.find(ID.ID);
+			iter = m_mapColInfo.find(ID.ID);
 
 			//충돌 정보가 미 등록 상태인 경우 등록( 충돌하지 않았다로 등록 )
 			if (m_mapColInfo.end() == iter)
@@ -154,8 +162,8 @@ void CCollisionMgr::CheckGroup(GROUP_TYPE _eLeft, GROUP_TYPE _eRight)
 
 	if (iCol < iRow)
 	{
-		UINT iRow = (UINT)_eRight;
-		UINT iCol = (UINT)_eLeft;
+		iRow = (UINT)_eRight;
+		iCol = (UINT)_eLeft;
 	}
 
 	if (m_arrCheck[iRow] & (1 << iCol))

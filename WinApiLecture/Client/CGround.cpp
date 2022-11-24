@@ -26,7 +26,7 @@ void CGround::OnCollisionEnter(CCollider* _pOther)
 	CObject* pOtherObj = _pOther->GetObj();
 	if (pOtherObj->GetName() == L"Player")
 	{
-		pOtherObj->GetGravity()->SetGround();
+		//pOtherObj->GetGravity()->SetGround();
 	}
 }
 
