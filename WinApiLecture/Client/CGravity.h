@@ -10,7 +10,7 @@ private:
 	bool		m_bGround;
 
 public:
-	void SetGround(bool _b) { m_bGround = _b; }
+	void SetGround(bool _b);
 
 public:
 	void finalupdate();

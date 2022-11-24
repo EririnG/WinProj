@@ -76,10 +76,13 @@ void CPlayer::update()
 
 
 
-	if (KEY_TAP(KEY::SPACE))
+
+
+	if (KEY_TAP(KEY::ENTER))
 	{
-		CreateMissile();
+		SetPos(Vec2(640.f, 584.f));
 	}
+
 
 	GetAnimator()->update();
 	
@@ -139,13 +142,18 @@ void CPlayer::update_state()
 		m_eCurState = PLAYER_STATE::WALK;
 	}
 
-
-
 	if (0.f == GetRigidBody()->GetSpeed())
 	{
 		m_eCurState = PLAYER_STATE::IDLE;
 	}
 
+	if (KEY_TAP(KEY::SPACE))
+	{
+
+		m_eCurState = PLAYER_STATE::JUMP;
+
+		GetRigidBody()->AddVelocity(Vec2(0.f, -200.f));
+	}
 
 
 }
@@ -233,6 +241,15 @@ void CPlayer::update_animation()
 			GetAnimator()->Play(L"WALK_LEFT", true);
 
 	}
+		break;
+	case PLAYER_STATE::JUMP:
+	{
+		if (1 == m_iDir)
+			GetAnimator()->Play(L"WALK_RIGHT", true);
+		else if (-1 == m_iDir)
+			GetAnimator()->Play(L"WALK_LEFT", true);
+	}
+
 		break;
 	case PLAYER_STATE::ATTACK:
 

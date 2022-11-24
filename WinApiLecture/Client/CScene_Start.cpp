@@ -78,10 +78,10 @@ void CScene_Start::update()
 		}
 	}
 
-	if (KEY_TAP(KEY::ENTER))
-	{
-		ChangeScene(SCENE_TYPE::TOOL);
-	}
+	//if (KEY_TAP(KEY::ENTER))
+	//{
+	//	ChangeScene(SCENE_TYPE::TOOL);
+	//}
 
 
 }
@@ -132,8 +132,8 @@ void CScene_Start::Enter()
 
 	 //몬스터 배치
 	Vec2 vResolution = CCore::GetInst()->GetResolution();
-	CMonster* pMon = CMonFactory::CreateMonster(MON_TYPE::NORMAL, vResolution / 2.f - Vec2(0.f, 300.f));
-	AddObject(pMon, GROUP_TYPE::MONSTER);
+	//CMonster* pMon = CMonFactory::CreateMonster(MON_TYPE::NORMAL, vResolution / 2.f - Vec2(0.f, 300.f));
+	//AddObject(pMon, GROUP_TYPE::MONSTER);
 	
 
 	// 땅 물체 배치
