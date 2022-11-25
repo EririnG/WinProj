@@ -138,8 +138,9 @@ void CScene_Start::Enter()
 
 	// 땅 물체 배치
 	CObject* pGround = new CGround;
+	pGround->SetName(L"Ground");
 	pGround->SetPos(Vec2(640.f, 584.f));
-	pGround->SetScale(Vec2(200.f, 60.f));
+	pGround->SetScale(Vec2(600.f, 60.f));
 	AddObject(pGround, GROUP_TYPE::GROUND);
 
 	// 충돌 지정

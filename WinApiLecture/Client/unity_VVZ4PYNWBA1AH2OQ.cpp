@@ -1,4 +1,7 @@
 
+#include "C:\Users\admin\source\repos\EririnG\WinProj\WinApiLecture\Client\AI.cpp"
+
+
 #include "C:\Users\admin\source\repos\EririnG\WinProj\WinApiLecture\Client\CAnimation.cpp"
 
 
@@ -23,8 +26,5 @@
 #include "C:\Users\admin\source\repos\EririnG\WinProj\WinApiLecture\Client\CEventMgr.cpp"
 
 
-#include "C:\Users\admin\source\repos\EririnG\WinProj\WinApiLecture\Client\CKeyMgr.cpp"
-
-
-#include "C:\Users\admin\source\repos\EririnG\WinProj\WinApiLecture\Client\CMissile.cpp"
+#include "C:\Users\admin\source\repos\EririnG\WinProj\WinApiLecture\Client\CGravity.cpp"
 

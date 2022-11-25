@@ -127,22 +127,25 @@ void CPlayer::update_state()
 	//	m_eCurState = PLAYER_STATE::WALK;
 	//}
 
-	if (KEY_TAP(KEY::A))
+
+	if (KEY_HOLD(KEY::A))
 	{
 		//m_vDir = Vec2(0.f, 0.f);
 		//m_vDir.x = -1;
 		m_iDir = -1;
-		m_eCurState = PLAYER_STATE::WALK;
+		if(PLAYER_STATE::JUMP != m_eCurState)
+			m_eCurState = PLAYER_STATE::WALK;
 	}
-	if (KEY_TAP(KEY::D))
+	if (KEY_HOLD(KEY::D))
 	{
 		//m_vDir = Vec2(0.f, 0.f);
 		//m_vDir.x = 1;
 		m_iDir = 1;
-		m_eCurState = PLAYER_STATE::WALK;
+		if (PLAYER_STATE::JUMP != m_eCurState)
+			m_eCurState = PLAYER_STATE::WALK;
 	}
 
-	if (0.f == GetRigidBody()->GetSpeed())
+	if (0.f == GetRigidBody()->GetSpeed() && PLAYER_STATE::JUMP != m_eCurState)
 	{
 		m_eCurState = PLAYER_STATE::IDLE;
 	}
@@ -152,7 +155,10 @@ void CPlayer::update_state()
 
 		m_eCurState = PLAYER_STATE::JUMP;
 
-		GetRigidBody()->AddVelocity(Vec2(0.f, -200.f));
+		if(GetRigidBody())
+		{
+			GetRigidBody()->SetVelocity(Vec2(GetRigidBody()->GetVelocity().x, -300.f));
+		}
 	}
 
 
@@ -161,24 +167,6 @@ void CPlayer::update_state()
 void CPlayer::update_move()
 {
 	CRigidBody* pRigid = GetRigidBody();
-
-	//if (KEY_TAP(KEY::W))
-	//{
-	//	pRigid->AddVelocity(Vec2(0.f, -100.f));
-	//}
-	//if (KEY_TAP(KEY::S))
-	//{
-	//	pRigid->AddVelocity(Vec2(0.f, 100.f));
-	//}
-	if (KEY_TAP(KEY::A))
-	{
-		pRigid->AddVelocity(Vec2(-100.f, 0.f));
-	}
-	if (KEY_TAP(KEY::D))
-	{
-		pRigid->AddVelocity(Vec2(100.f, 0.f));
-	}
-
 
 	//if (KEY_HOLD(KEY::W))
 	//{
@@ -198,6 +186,24 @@ void CPlayer::update_move()
 	{
 		pRigid->AddForce(Vec2(200.f, 0.f));
 	}
+
+	//if (KEY_TAP(KEY::W))
+	//{
+	//	pRigid->AddVelocity(Vec2(0.f, -100.f));
+	//}
+	//if (KEY_TAP(KEY::S))
+	//{
+	//	pRigid->AddVelocity(Vec2(0.f, 100.f));
+	//}
+	if (KEY_TAP(KEY::A))
+	{
+		pRigid->SetVelocity(Vec2(-100.f, pRigid->GetVelocity().y));
+	}
+	if (KEY_TAP(KEY::D))
+	{
+		pRigid->SetVelocity(Vec2(100.f, pRigid->GetVelocity().y));
+	}
+
 }
 
 void CPlayer::update_animation()
@@ -265,4 +271,17 @@ void CPlayer::update_animation()
 void CPlayer::update_gravity()
 {
 	GetRigidBody()->AddForce(Vec2(0.f,500.f));
+}
+
+void CPlayer::OnCollisionEnter(CCollider* _pOther)
+{
+	CObject* pOtherObj = _pOther->GetObj();
+	if (L"Ground" == _pOther->GetObj()->GetName())
+	{
+		Vec2 vPos = GetPos();
+		if (vPos.y < pOtherObj->GetPos().y)
+		{
+			m_eCurState = PLAYER_STATE::IDLE;
+		}
+	}
 }
