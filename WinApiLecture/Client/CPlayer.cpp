@@ -38,6 +38,8 @@ CPlayer::CPlayer()
 	CTexture* pTex = CResMgr::GetInst()->LoadTexture(L"PlayerTex", L"texture\\link_0.bmp");
 	CreateAnimator();
 	
+	//GetAnimator()->LoadAnimation(L"animation\\player_idle_left.anim");
+
 	GetAnimator()->CreateAnimation(L"IDLE_DOWN", pTex, Vec2(0.f, 0.f), Vec2(60, 65), Vec2(60.f, 0.f), 0.1f, 3);
 	GetAnimator()->CreateAnimation(L"IDLE_LEFT", pTex, Vec2(0.f, 65.f), Vec2(60, 65), Vec2(60.f, 0.f), 0.1f, 3);
 	GetAnimator()->CreateAnimation(L"IDLE_RIGHT", pTex, Vec2(0.f, 195.f), Vec2(60, 65), Vec2(60.f, 0.f), 0.1f, 3);
@@ -50,12 +52,10 @@ CPlayer::CPlayer()
 
 	GetAnimator()->Play(L"IDLE_DOWN",true);
 
+	GetAnimator()->FindAnimation(L"IDLE_DOWN")->Save(L"animation\\player_idle_left.anim");
+
+
 	CreateGravity();
-	//CAnimation* pAnim = GetAnimator()->FindAnimation(L"WALK_DOWN");
-	//for (UINT i = 0; i < pAnim->GetMaxFrame(); ++i)
-	//{
-	//	pAnim->GetFrame(i).vOffset = Vec2(0.f, -20.f);
-	//}
 	
 }
 
