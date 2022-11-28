@@ -33,11 +33,14 @@ CPlayer::CPlayer()
 	CreateRigidBody();
 
 	// Texture 로딩하기
-	//CTexture* pLeftTex = CResMgr::GetInst()->LoadTexture(L"PlayerLeft", L"texture\\Player01_L.bmp");
-	//CTexture* pRightTex = CResMgr::GetInst()->LoadTexture(L"PlayerRight", L"texture\\Player02_R.bmp");
 	CTexture* pTex = CResMgr::GetInst()->LoadTexture(L"PlayerTex", L"texture\\link_0.bmp");
 	CreateAnimator();
 	
+	//GetAnimator()->LoadAnimation(L"animation\\player_idle_left.anim");
+	//GetAnimator()->LoadAnimation(L"animation\\player_idle_right.anim");
+	//GetAnimator()->LoadAnimation(L"animation\\player_walk_left.anim");
+	//GetAnimator()->LoadAnimation(L"animation\\player_walk_right.anim");
+
 	//GetAnimator()->LoadAnimation(L"animation\\player_idle_left.anim");
 
 	GetAnimator()->CreateAnimation(L"IDLE_DOWN", pTex, Vec2(0.f, 0.f), Vec2(60, 65), Vec2(60.f, 0.f), 0.1f, 3);
@@ -50,9 +53,12 @@ CPlayer::CPlayer()
 	GetAnimator()->CreateAnimation(L"WALK_DOWN", pTex, Vec2(0.f, 260.f), Vec2(60.f, 65.f), Vec2(60.f, 0.f),0.1f, 10);
 	GetAnimator()->CreateAnimation(L"WALK_UP", pTex, Vec2(0.f, 390.f), Vec2(60.f, 65.f), Vec2(60.f, 0.f), 0.1f, 10);
 
-	GetAnimator()->Play(L"IDLE_DOWN",true);
+	GetAnimator()->FindAnimation(L"IDLE_LEFT")->Save(L"animation\\player_idle_left.anim");
+	GetAnimator()->FindAnimation(L"IDLE_RIGHT")->Save(L"animation\\player_idle_right.anim");
+	GetAnimator()->FindAnimation(L"WALK_LEFT")->Save(L"animation\\player_walk_left.anim");
+	GetAnimator()->FindAnimation(L"WALK_RIGHT")->Save(L"animation\\player_walk_right.anim");
 
-	GetAnimator()->FindAnimation(L"IDLE_DOWN")->Save(L"animation\\player_idle_left.anim");
+	GetAnimator()->Play(L"IDLE_DOWN", true);
 
 
 	CreateGravity();

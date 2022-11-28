@@ -5,9 +5,11 @@
 #include "CTexture.h"
 #include "CObject.h"
 #include "CCamera.h"
+#include "CRes.h"
 
 #include "CTimeMgr.h"
 #include "CPathMgr.h"
+#include "CResMgr.h"
 
 CAnimation::CAnimation()
 	: m_pAnimator(nullptr)
@@ -98,11 +100,52 @@ void CAnimation::Save(const wstring& _strRelativePath)
 	assert(pFile);
 
 	// Animation 의 이름을 저장 (데이터 직렬화)
-	SaveWString(m_strName, pFile);
+	fprintf(pFile, "[Animation Name]\n");
+	string strName = string(m_strName.begin(), m_strName.end());
+	fprintf(pFile, strName.c_str());
+	fprintf(pFile, "\n");
 
 	// Animation 이 사용하는 텍스쳐
-	m_pTex;
-	
+	fprintf(pFile, "[Texture Name\n");
+	strName = string(m_pTex->GetKey().begin(), m_pTex->GetKey().end());
+	fprintf(pFile, strName.c_str());
+	fprintf(pFile, "\n");
+
+	// Animation 이 사용하는 텍스쳐 경로
+	fprintf(pFile, "[Texture Path\n");
+	strName = string(m_pTex->GetRelativePath().begin(), m_pTex->GetRelativePath().end());
+	fprintf(pFile, strName.c_str());
+	fprintf(pFile, "\n");
+
+	// 프레임별 개수
+	fprintf(pFile, "[Frame Count\n");
+	fprintf(pFile, "%d\n",m_vecFrm.size());
+	for (size_t i = 0; i < m_vecFrm.size(); ++i)
+	{
+		fprintf(pFile, "[Frame Index\n");
+		fprintf(pFile, "%d\n",(int)i);
+
+		fprintf(pFile, "[Slice Size\n");
+		fprintf(pFile, "%d, %d\n", (int)m_vecFrm[i].vLT.x,(int)m_vecFrm[i].vLT.y);
+
+		fprintf(pFile, "[Left Top\n");
+		fprintf(pFile, "%d, %d\n", (int)m_vecFrm[i].vSlice.x, (int)m_vecFrm[i].vSlice.y);
+
+		fprintf(pFile, "[Offset\n");
+		fprintf(pFile, "%d, %d\n", (int)m_vecFrm[i].vOffset.x, (int)m_vecFrm[i].vOffset.y);
+
+		fprintf(pFile, "[Duraiton\n");
+		fprintf(pFile, "%f\n", m_vecFrm[i].fDuration);
+
+	}
+	strName = string(m_pTex->GetRelativePath().begin(), m_pTex->GetRelativePath().end());
+	fprintf(pFile, strName.c_str());
+	fprintf(pFile, "\n");
+
+	// Animation 이 사용하는 텍스쳐
+	SaveWString(m_pTex->GetKey(), pFile);
+	SaveWString(m_pTex->GetRelativePath(), pFile);
+
 	// 프레임 개수
 	size_t iFrameCount = m_vecFrm.size();
 	fwrite(&iFrameCount, sizeof(size_t), 1, pFile);
@@ -122,11 +165,15 @@ void CAnimation::Load(const wstring& _strRelativePath)
 	_wfopen_s(&pFile, strFilePath.c_str(), L"rb");
 	assert(pFile);
 
-	//텍스쳐
-
-
 	// 애니메이션 이름 읽기
 	LoadWString(m_strName, pFile);
+
+	//텍스쳐
+	wstring strTexKey, strTexPath;
+	LoadWString(strTexKey, pFile);
+	LoadWString(strTexPath, pFile);
+	m_pTex = CResMgr::GetInst()->LoadTexture(strTexKey, strTexPath);
+
 
 	// 프레임 개수
 	size_t iFrameCount = 0;
