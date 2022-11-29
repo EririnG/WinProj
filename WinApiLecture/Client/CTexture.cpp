@@ -36,8 +36,6 @@ void CTexture::Load(const wstring& _strfilepath)
 	// ∫Ò∆Æ∏ ¡§∫∏
 	GetObject(m_hBit, sizeof(BITMAP), &m_bitInfo);
 
-
-
 }
 
 void CTexture::Create(UINT _iWidth, UINT _iHeight)

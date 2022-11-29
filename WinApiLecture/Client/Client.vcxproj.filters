@@ -137,6 +137,9 @@
     <Filter Include="Engine\04. Object\Ground">
       <UniqueIdentifier>{431f5b17-670b-455d-9c14-c7627a8cc273}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Engine\03. Manger\SoundMgr">
+      <UniqueIdentifier>{e401dfba-5cba-459f-855a-6ee025161527}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CCore.h">
@@ -272,6 +275,9 @@
     <ClInclude Include="CGround.h">
       <Filter>Engine\04. Object\Ground</Filter>
     </ClInclude>
+    <ClInclude Include="CSoundMgr.h">
+      <Filter>Engine\03. Manger\SoundMgr</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CCore.cpp">
@@ -385,6 +391,9 @@
     </ClCompile>
     <ClCompile Include="CGround.cpp">
       <Filter>Engine\04. Object\Ground</Filter>
+    </ClCompile>
+    <ClCompile Include="CSoundMgr.cpp">
+      <Filter>Engine\03. Manger\SoundMgr</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -13,6 +13,8 @@
 #include "CTexture.h"
 #include "SelectGDI.h"
 #include "resource.h"
+#include "CSoundMgr.h"
+#include "CSound.h"
 
 CCore::CCore()
 	: m_hWnd(0)
@@ -63,8 +65,18 @@ int CCore::init(HWND _hWnd, POINT _ptResolution)
 	CTimeMgr::GetInst()->init();
 	CKeyMgr::GetInst()->init();
 	CCamera::GetInst()->init();
+	CSoundMgr::GetInst()->init();
 	CSceneMgr::GetInst()->init();
 	
+	// Sound 로드 테스트
+	CResMgr::GetInst()->LoadSound(L"BGM_01", L"sound\\TimeTemple.wav");
+	CSound* pNewSound = CResMgr::GetInst()->FindSound(L"BGM_01");
+
+	pNewSound->Play();
+
+	//pNewSound->SetPosition(50.f);
+	//pNewSound->PlayAsBGM(true);
+	pNewSound->SetVolume(10.f);
 
 	return S_OK;
 }
