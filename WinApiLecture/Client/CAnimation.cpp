@@ -106,52 +106,53 @@ void CAnimation::Save(const wstring& _strRelativePath)
 	fprintf(pFile, "\n");
 
 	// Animation 이 사용하는 텍스쳐
-	fprintf(pFile, "[Texture Name\n");
+	fprintf(pFile, "[Texture Name]\n");
 	strName = string(m_pTex->GetKey().begin(), m_pTex->GetKey().end());
 	fprintf(pFile, strName.c_str());
 	fprintf(pFile, "\n");
 
 	// Animation 이 사용하는 텍스쳐 경로
-	fprintf(pFile, "[Texture Path\n");
+	fprintf(pFile, "[Texture Path]\n");
 	strName = string(m_pTex->GetRelativePath().begin(), m_pTex->GetRelativePath().end());
 	fprintf(pFile, strName.c_str());
 	fprintf(pFile, "\n");
 
 	// 프레임별 개수
-	fprintf(pFile, "[Frame Count\n");
-	fprintf(pFile, "%d\n",m_vecFrm.size());
+	fprintf(pFile, "[Frame Count]\n");
+	fprintf(pFile, "%d\n",(int)m_vecFrm.size());
+
+	// 모든 프레임 정보
 	for (size_t i = 0; i < m_vecFrm.size(); ++i)
 	{
-		fprintf(pFile, "[Frame Index\n");
+		fprintf(pFile, "[Frame Index]\n");
 		fprintf(pFile, "%d\n",(int)i);
 
-		fprintf(pFile, "[Slice Size\n");
-		fprintf(pFile, "%d, %d\n", (int)m_vecFrm[i].vLT.x,(int)m_vecFrm[i].vLT.y);
+		fprintf(pFile, "[Left Top]\n");
+		fprintf(pFile, "%d %d\n", (int)m_vecFrm[i].vLT.x,(int)m_vecFrm[i].vLT.y);
 
-		fprintf(pFile, "[Left Top\n");
-		fprintf(pFile, "%d, %d\n", (int)m_vecFrm[i].vSlice.x, (int)m_vecFrm[i].vSlice.y);
+		fprintf(pFile, "[Slice Size]\n");
+		fprintf(pFile, "%d %d\n", (int)m_vecFrm[i].vSlice.x, (int)m_vecFrm[i].vSlice.y);
 
-		fprintf(pFile, "[Offset\n");
-		fprintf(pFile, "%d, %d\n", (int)m_vecFrm[i].vOffset.x, (int)m_vecFrm[i].vOffset.y);
+		fprintf(pFile, "[Offset]\n");
+		fprintf(pFile, "%d %d\n", (int)m_vecFrm[i].vOffset.x, (int)m_vecFrm[i].vOffset.y);
 
-		fprintf(pFile, "[Duraiton\n");
+		fprintf(pFile, "[Duraiton]\n");
 		fprintf(pFile, "%f\n", m_vecFrm[i].fDuration);
-
 	}
-	strName = string(m_pTex->GetRelativePath().begin(), m_pTex->GetRelativePath().end());
-	fprintf(pFile, strName.c_str());
-	fprintf(pFile, "\n");
+	//strName = string(m_pTex->GetRelativePath().begin(), m_pTex->GetRelativePath().end());
+	//fprintf(pFile, strName.c_str());
+	//fprintf(pFile, "\n");
 
-	// Animation 이 사용하는 텍스쳐
-	SaveWString(m_pTex->GetKey(), pFile);
-	SaveWString(m_pTex->GetRelativePath(), pFile);
+	//// Animation 이 사용하는 텍스쳐
+	//SaveWString(m_pTex->GetKey(), pFile);
+	//SaveWString(m_pTex->GetRelativePath(), pFile);
 
-	// 프레임 개수
-	size_t iFrameCount = m_vecFrm.size();
-	fwrite(&iFrameCount, sizeof(size_t), 1, pFile);
-	
-	// 모든 프레임 정보
-	fwrite(m_vecFrm.data(), sizeof(tAnimFrm), iFrameCount, pFile);
+	//// 프레임 개수
+	//size_t iFrameCount = m_vecFrm.size();
+	//fwrite(&iFrameCount, sizeof(size_t), 1, pFile);
+	//
+	//// 모든 프레임 정보
+	//fwrite(m_vecFrm.data(), sizeof(tAnimFrm), iFrameCount, pFile);
 
 	fclose(pFile);
 }
@@ -161,27 +162,100 @@ void CAnimation::Load(const wstring& _strRelativePath)
 	wstring strFilePath = CPathMgr::GetInst()->GetContentPath();
 	strFilePath += _strRelativePath;
 
-	FILE* pFile = nullptr;
+	FILE* pFile = nullptr ;
 	_wfopen_s(&pFile, strFilePath.c_str(), L"rb");
 	assert(pFile);
 
-	// 애니메이션 이름 읽기
-	LoadWString(m_strName, pFile);
+	// Animation 의 이름을 읽기
+	string str;
+	char szBuff[256] = {};
 
-	//텍스쳐
-	wstring strTexKey, strTexPath;
-	LoadWString(strTexKey, pFile);
-	LoadWString(strTexPath, pFile);
+	FScanf(szBuff, pFile);
+	FScanf(szBuff, pFile);
+	str = szBuff;
+
+	m_strName = wstring(str.begin(), str.end());
+
+	// 참조하는 텍스쳐 이름 및 경로
+	FScanf(szBuff, pFile);
+	FScanf(szBuff, pFile);
+	
+	str = szBuff;
+	wstring strTexKey = wstring(str.begin(), str.end());
+	
+	FScanf(szBuff, pFile);
+	FScanf(szBuff, pFile);
+	
+	str = szBuff;
+	wstring strTexPath = wstring(str.begin(), str.end());
+
 	m_pTex = CResMgr::GetInst()->LoadTexture(strTexKey, strTexPath);
 
-
-	// 프레임 개수
-	size_t iFrameCount = 0;
-	fread(&iFrameCount, sizeof(size_t), 1, pFile);
+	// 프레임별 개수
+	FScanf(szBuff, pFile);
+	int iFrameCount = 0;
+	fscanf_s(pFile, "%d", &iFrameCount);
 
 	// 모든 프레임 정보
-	m_vecFrm.resize(iFrameCount);
-	fread(m_vecFrm.data(), sizeof(tAnimFrm), iFrameCount, pFile);
+	tAnimFrm frm = {};
+	for (int i = 0; i < iFrameCount; ++i)
+	{
+		POINT pt = {};
+		while (true)
+		{
+			FScanf(szBuff, pFile);
+
+			if (!strcmp("[Frame Index]", szBuff))
+			{
+				fscanf_s(pFile, "%d", &pt.x);
+			}
+			else if (!strcmp("[Left Top]", szBuff))
+			{
+				fscanf_s(pFile, "%d", &pt.x);
+				fscanf_s(pFile, "%d", &pt.y);
+
+				frm.vLT = pt;
+			}
+			else if (!strcmp("[Offset]", szBuff))
+			{
+				fscanf_s(pFile, "%d", &pt.x);
+				fscanf_s(pFile, "%d", &pt.y);
+
+				frm.vOffset = pt;
+			}
+			else if (!strcmp("[Slice Size]", szBuff))
+			{
+				fscanf_s(pFile, "%d", &pt.x);
+				fscanf_s(pFile, "%d", &pt.y);
+
+				frm.vSlice = pt;
+			}
+			else if (!strcmp("[Duraiton]", szBuff))
+			{
+				fscanf_s(pFile, "%f", &frm.fDuration);
+				break;
+			}
+		}
+		m_vecFrm.push_back(frm);
+	}
+
+	//// 애니메이션 이름 읽기
+	//LoadWString(m_strName, pFile);
+
+	////텍스쳐
+	//wstring strTexKey, strTexPath;
+	//LoadWString(strTexKey, pFile);
+	//LoadWString(strTexPath, pFile);
+	//m_pTex = CResMgr::GetInst()->LoadTexture(strTexKey, strTexPath);
+
+
+	//// 프레임 개수
+	//size_t iFrameCount = 0;
+	//fread(&iFrameCount, sizeof(size_t), 1, pFile);
+
+	//// 모든 프레임 정보
+	//m_vecFrm.resize(iFrameCount);
+	//fread(m_vecFrm.data(), sizeof(tAnimFrm), iFrameCount, pFile);
 
 	fclose(pFile);
 }
