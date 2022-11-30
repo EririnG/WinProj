@@ -52,14 +52,14 @@ void CScene_Tool::Enter()
 	AddObject(pPanelUI, GROUP_TYPE::UI);
 
 
-	/*
+	
 	CUI* pClonePanel = pPanelUI->Clone();
 	pClonePanel->SetPos(pClonePanel->GetPos() + Vec2(-300.f, 0.f));
 	((CBtnUI*)pClonePanel->GetChildUI()[0])->SetClickedCallBack(ChangeScene, 0, 0);
 	AddObject(pClonePanel, GROUP_TYPE::UI);
 
 	m_pUI = pClonePanel;
-*/
+
 	// Camera Look ÁöÁ¤
 	CCamera::GetInst()->SetLookAt(vResolution / 2.f);
 
@@ -198,10 +198,6 @@ void CScene_Tool::LoadTileData()
 	}
 }
 
-void ChangeScene(DWORD_PTR, DWORD_PTR)
-{
-	ChangeScene(SCENE_TYPE::START);
-}
 
 
 

@@ -140,6 +140,9 @@
     <Filter Include="Engine\03. Manger\SoundMgr">
       <UniqueIdentifier>{e401dfba-5cba-459f-855a-6ee025161527}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Engine\05. Scene\Scene_01">
+      <UniqueIdentifier>{03bf555d-5155-4373-8daf-8e206520b66e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CCore.h">
@@ -278,6 +281,9 @@
     <ClInclude Include="CSoundMgr.h">
       <Filter>Engine\03. Manger\SoundMgr</Filter>
     </ClInclude>
+    <ClInclude Include="CScene_01.h">
+      <Filter>Engine\05. Scene\Scene_01</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CCore.cpp">
@@ -394,6 +400,9 @@
     </ClCompile>
     <ClCompile Include="CSoundMgr.cpp">
       <Filter>Engine\03. Manger\SoundMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="CScene_01.cpp">
+      <Filter>Engine\05. Scene\Scene_01</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

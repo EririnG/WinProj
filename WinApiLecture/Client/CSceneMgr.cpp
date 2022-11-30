@@ -3,6 +3,7 @@
 
 #include "CScene_Start.h"
 #include "CScene_Tool.h"
+#include "CScene_01.h"
 
 #include "CResMgr.h"
 #include "CCore.h"
@@ -38,9 +39,9 @@ void CSceneMgr::init()
 	m_arrScene[(UINT)SCENE_TYPE::TOOL] = new CScene_Tool;
 	m_arrScene[(UINT)SCENE_TYPE::TOOL]->SetName(L"Tool Scene");
 
-	/*m_arrscene[(uint)scene_type::tool] = new cscene_tool;
-	m_arrscene[(uint)scene_type::stage_01] = new cscene_stage01;
-	m_arrscene[(uint)scene_type::stage_02] = new cscene_stage02;*/
+	m_arrScene[(UINT)SCENE_TYPE::STAGE_01] = new CScene_01;
+	m_arrScene[(UINT)SCENE_TYPE::STAGE_01]->SetName(L"Stage_01");
+
 
 	// 현재 씬 지정
 	m_pCurScene = m_arrScene[(UINT)SCENE_TYPE::START];

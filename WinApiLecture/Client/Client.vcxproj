@@ -184,6 +184,7 @@
     <ClInclude Include="CResMgr.h" />
     <ClInclude Include="CRigidBody.h" />
     <ClInclude Include="CScene.h" />
+    <ClInclude Include="CScene_01.h" />
     <ClInclude Include="CScene_Start.h" />
     <ClInclude Include="CScene_Tool.h" />
     <ClInclude Include="CSceneMgr.h" />
@@ -231,6 +232,7 @@
     <ClCompile Include="CResMgr.cpp" />
     <ClCompile Include="CRigidBody.cpp" />
     <ClCompile Include="CScene.cpp" />
+    <ClCompile Include="CScene_01.cpp" />
     <ClCompile Include="CScene_Start.cpp" />
     <ClCompile Include="CScene_Tool.cpp" />
     <ClCompile Include="CSceneMgr.cpp" />

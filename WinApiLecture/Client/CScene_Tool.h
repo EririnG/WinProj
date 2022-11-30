@@ -15,8 +15,6 @@ public:
 
 public:
     void SetTileIdx();
-
-
     void SaveTileData();
     void SaveTile(const wstring& _strFilePath);
     void LoadTileData();

@@ -11,6 +11,9 @@
 #include "C:\Users\user\source\repos\EririnG\WinProj\WinApiLecture\Client\CScene.cpp"
 
 
+#include "C:\Users\user\source\repos\EririnG\WinProj\WinApiLecture\Client\CScene_01.cpp"
+
+
 #include "C:\Users\user\source\repos\EririnG\WinProj\WinApiLecture\Client\CScene_Start.cpp"
 
 
@@ -24,7 +27,4 @@
 
 
 #include "C:\Users\user\source\repos\EririnG\WinProj\WinApiLecture\Client\CSoundMgr.cpp"
-
-
-#include "C:\Users\user\source\repos\EririnG\WinProj\WinApiLecture\Client\CState.cpp"
 

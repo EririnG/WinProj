@@ -1,33 +1,23 @@
 #pragma once
 #include "CScene.h"
-
-class CTexture;
+class CUI;
 
 class CScene_Start:
 	public CScene
 {
 private:
-	CTexture*	m_pTex;
-	Vec2		m_vForcePos;
-	float		m_fForceRadius;
-	float		m_fCurRadius;
-	float		m_fForce;
-	bool		m_bUseForce;
+	CUI* m_pUI;
 
 public:
-	virtual void update();
-	virtual void render(HDC _dc);
-
 	virtual void Enter();
 	virtual void Exit();
+	virtual void update();
 
 public:
-	void CreateForce();
-
+	void ChangeScene(DWORD_PTR, DWORD_PTR);
 
 public:
 	CScene_Start();
 	~CScene_Start();
-
 };
 
