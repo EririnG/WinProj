@@ -27,7 +27,7 @@ public:
     virtual void MouseLbtnClicked();
 
         
-    void SetClickedCallBack(BTN_FUNC _pFunc,DWORD_PTR _param1,DWORD_PTR _param2) 
+    void SetClickedCallBack(BTN_FUNC _pFunc,DWORD_PTR _param1,DWORD_PTR _param2)
     {
         m_pFunc = _pFunc; 
         m_param1 = _param1;
@@ -44,6 +44,5 @@ public:
 public:
     CBtnUI();
     ~CBtnUI();
-
 };
 

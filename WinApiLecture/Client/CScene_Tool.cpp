@@ -49,6 +49,7 @@ void CScene_Tool::Enter()
 	pBtnUI->SetPos(Vec2(0.f, 0.f));
 	((CBtnUI*)pBtnUI)->SetClickedCallBack(this, (SCENE_MEMFUNC) & CScene_Tool::SaveTileData);
 	pPanelUI->AddChild(pBtnUI);
+	
 	AddObject(pPanelUI, GROUP_TYPE::UI);
 
 
@@ -86,6 +87,10 @@ void CScene_Tool::update()
 	if (KEY_TAP(KEY::CTRL))
 	{
 		LoadTileData();
+	}
+	if (KEY_TAP(KEY::X))
+	{
+		ChangeScene(SCENE_TYPE::START);
 	}
 }
 

@@ -6,6 +6,10 @@ class CPanelUI :
 {
 private:
     Vec2    m_vDragStart;
+    bool    m_bMove;
+
+public:
+    void SetMove(bool _Move) { m_bMove = _Move; }
 
 public:
     virtual void MouseOn();
@@ -17,7 +21,7 @@ public:
 public:
     virtual void update();
     virtual void render(HDC _dc);
-
+    
 public:
     CPanelUI();
     ~CPanelUI();

@@ -39,7 +39,7 @@ enum class GROUP_TYPE
 	PROJ_PLAYER,
 	PROJ_MONSTER,
 
-	UI = 31,
+	UI = 7,
 	END = 32,
 };
 

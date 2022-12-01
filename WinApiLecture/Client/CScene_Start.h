@@ -13,8 +13,6 @@ public:
 	virtual void Exit();
 	virtual void update();
 
-public:
-	void ChangeScene(DWORD_PTR, DWORD_PTR);
 
 public:
 	CScene_Start();

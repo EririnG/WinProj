@@ -31,12 +31,6 @@ void CScene_Start::update()
 	CScene::update();
 }
 
-void CScene_Start::ChangeScene(DWORD_PTR, DWORD_PTR)
-{
-	
-}
-
-
 
 void CScene_Start::Enter()
 {
@@ -57,32 +51,28 @@ void CScene_Start::Enter()
 	pStartBtnUI->SetName(L"StartBtnChildUI");
 	pStartBtnUI->SetScale(Vec2(400.f, 120.f));
 	pStartBtnUI->SetPos(Vec2(50.f, 50.f));
-	((CBtnUI*)pPanelUI->GetChildUI()[0])->SetClickedCallBack(ChangeScene, 0, 0);
-
-	pPanelUI->AddChild(pStartBtnUI);
-	AddObject(pPanelUI, GROUP_TYPE::UI);
-
+	pStartBtnUI->SetClickedCallBack(ChangeScene, 0, 0);
+	
 	CBtnUI* pSetBtnUI = new CBtnUI;
 	pSetBtnUI->SetName(L"SetBtnChildUI");
 	pSetBtnUI->SetScale(Vec2(400.f, 120.f));
 	pSetBtnUI->SetPos(Vec2(50.f, 175.f));
-	((CBtnUI*)pSetBtnUI)->SetClickedCallBack(this, (SCENE_MEMFUNC)&CScene_Start::CreateTile);
-	pPanelUI->AddChild(pSetBtnUI);
-	AddObject(pPanelUI, GROUP_TYPE::UI);
-
+	
+	
 	CBtnUI* pHelpBtnUI = new CBtnUI;
 	pHelpBtnUI->SetName(L"pHelpBtnChildUI");
 	pHelpBtnUI->SetScale(Vec2(400.f, 120.f));
 	pHelpBtnUI->SetPos(Vec2(50.f, 300.f));
-	((CBtnUI*)pHelpBtnUI)->SetClickedCallBack(this, (SCENE_MEMFUNC)&CScene_Start::CreateTile);
-	pPanelUI->AddChild(pHelpBtnUI);
-	AddObject(pPanelUI, GROUP_TYPE::UI);
+	
 
 	CBtnUI* pExitBtnUI = new CBtnUI;
 	pExitBtnUI->SetName(L"ExitBtnChildUI");
 	pExitBtnUI->SetScale(Vec2(400.f, 120.f));
 	pExitBtnUI->SetPos(Vec2(50.f, 425.f));
-	((CBtnUI*)pExitBtnUI)->SetClickedCallBack(this, (SCENE_MEMFUNC)&CScene_Start::CreateTile);
+
+	pPanelUI->AddChild(pStartBtnUI);
+	pPanelUI->AddChild(pSetBtnUI);
+	pPanelUI->AddChild(pHelpBtnUI);
 	pPanelUI->AddChild(pExitBtnUI);
 	AddObject(pPanelUI, GROUP_TYPE::UI);
 
@@ -109,5 +99,5 @@ void CScene_Start::Exit()
 
 void ChangeScene(DWORD_PTR, DWORD_PTR)
 {
-	ChangeScene(SCENE_TYPE::START);
+	ChangeScene(SCENE_TYPE::STAGE_01);
 }
