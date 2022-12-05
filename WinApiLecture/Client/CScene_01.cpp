@@ -13,6 +13,7 @@
 #include "CRigidBody.h"
 #include "SelectGDI.h"
 #include "CGround.h"
+#include "CSound.h"
 
 #include "CCore.h"
 
@@ -141,6 +142,13 @@ void CScene_01::Enter()
 	// Camera 효과 지정
 	CCamera::GetInst()->FadeOut(1.0f);
 	CCamera::GetInst()->FadeIn(1.0f);
+
+
+	CResMgr::GetInst()->LoadSound(L"BGM_01", L"sound\\FloralLife.wav");
+	CSound* pScene01_Sound = CResMgr::GetInst()->FindSound(L"BGM_01");
+	pScene01_Sound->Play();
+	pScene01_Sound->SetVolume(10.f);
+
 
 	start();
 }

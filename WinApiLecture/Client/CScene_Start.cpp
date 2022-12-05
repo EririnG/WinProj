@@ -12,6 +12,8 @@
 #include "CUI.h"
 #include "CPanelUI.h"
 #include "CBtnUI.h"
+#include "CSound.h"
+
 
 void ChangeScene(DWORD_PTR, DWORD_PTR);
 
@@ -51,13 +53,13 @@ void CScene_Start::Enter()
 	pStartBtnUI->SetName(L"StartBtnChildUI");
 	pStartBtnUI->SetScale(Vec2(400.f, 120.f));
 	pStartBtnUI->SetPos(Vec2(50.f, 50.f));
-	pStartBtnUI->SetClickedCallBack(ChangeScene, 0, 0);
+	pStartBtnUI->SetClickedCallBack(ChangeScene,0, 0);
 	
 	CBtnUI* pSetBtnUI = new CBtnUI;
 	pSetBtnUI->SetName(L"SetBtnChildUI");
 	pSetBtnUI->SetScale(Vec2(400.f, 120.f));
 	pSetBtnUI->SetPos(Vec2(50.f, 175.f));
-	
+	pSetBtnUI->SetClickedCallBack(ChangeScene, 0, 0);
 	
 	CBtnUI* pHelpBtnUI = new CBtnUI;
 	pHelpBtnUI->SetName(L"pHelpBtnChildUI");
@@ -77,24 +79,28 @@ void CScene_Start::Enter()
 	AddObject(pPanelUI, GROUP_TYPE::UI);
 
 
+	//CUI* pClonePanel = pPanelUI->Clone();
+	//pClonePanel->SetPos(pClonePanel->GetPos() + Vec2(-300.f, 0.f));
+	//((CBtnUI*)pClonePanel->GetChildUI()[0])->SetClickedCallBack(ChangeScene, 0, 0);
+	//AddObject(pClonePanel, GROUP_TYPE::UI);
 
-	/*
-	CUI* pClonePanel = pPanelUI->Clone();
-	pClonePanel->SetPos(pClonePanel->GetPos() + Vec2(-300.f, 0.f));
-	((CBtnUI*)pClonePanel->GetChildUI()[0])->SetClickedCallBack(ChangeScene, 0, 0);
-	AddObject(pClonePanel, GROUP_TYPE::UI);
+	//m_pUI = pClonePanel;
 
-	m_pUI = pClonePanel;
-*/
-// Camera Look 지정
+	// Sound 재생
+	CResMgr::GetInst()->LoadSound(L"StartSceneBGM", L"sound\\Title.wav");
+	CSound* pTitleSound = CResMgr::GetInst()->FindSound(L"StartSceneBGM");
+	pTitleSound->Play();
+	pTitleSound->SetVolume(10.f);
+	// Camera Look 지정
 	CCamera::GetInst()->SetLookAt(vResolution / 2.f);
 }
 
 void CScene_Start::Exit()
 {
 	CCore::GetInst()->DivideMenu();
-
-	DeleteAll();
+	CSound* pTitleSound = CResMgr::GetInst()->FindSound(L"StartSceneBGM");
+	pTitleSound->Stop();
+	//DeleteAll();
 }
 
 void ChangeScene(DWORD_PTR, DWORD_PTR)

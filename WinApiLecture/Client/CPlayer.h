@@ -20,13 +20,14 @@ enum class PLAYER_ATTACK_STATE
 };
 
 class CTexture;
-
+class CSound;
 
 class CPlayer:
 	public CObject
 {
 private:
 	CTexture*			m_pTex;
+	CSound*				m_pSound;
 	vector<CObject*>	m_vecColObj;
 	PLAYER_STATE		m_eCurState;
 	PLAYER_STATE		m_ePrevState;

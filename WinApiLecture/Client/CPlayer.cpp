@@ -15,9 +15,11 @@
 #include "CAnimation.h"
 #include "CRigidBody.h"
 #include "CGravity.h"
+#include "CSound.h"
 
 CPlayer::CPlayer()
 	: m_pTex(nullptr)
+	, m_pSound(nullptr)
 	, m_eCurState(PLAYER_STATE::IDLE)
 	, m_ePrevState(PLAYER_STATE::WALK)
 	, m_iDir(1)
@@ -25,7 +27,8 @@ CPlayer::CPlayer()
 {
 	//_pTex = CResMgr::GetInst()->LoadTexture(L"PlayerTex", L"texture\\link_0.bmp");
 	
-	
+	CResMgr::GetInst()->LoadSound(L"Jump", L"sound\\Player_Jump.wav");
+
 	CreateCollider();
 	GetCollider()->SetOffsetPos(Vec2(0.f, 5.f));
 	GetCollider()->SetScale(Vec2(20.f, 55.f));
@@ -164,6 +167,9 @@ void CPlayer::update_state()
 		{
 			GetRigidBody()->SetVelocity(Vec2(GetRigidBody()->GetVelocity().x, -300.f));
 		}
+		m_pSound = CResMgr::GetInst()->FindSound(L"Jump");
+		m_pSound->Play(false);
+		m_pSound->SetVolume(10.f);
 	}
 
 
