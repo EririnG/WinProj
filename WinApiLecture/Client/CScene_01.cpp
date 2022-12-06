@@ -105,7 +105,7 @@ void CScene_01::Enter()
 	// Object 추가
 	CObject* pObj = new CPlayer;
 	pObj->SetName(L"Player");
-	pObj->SetPos(Vec2(640.f, 450.f));
+	pObj->SetPos(Vec2(280.f, 450.f));
 	pObj->SetScale(Vec2(100.f, 100.f));
 	AddObject(pObj, GROUP_TYPE::PLAYER);
 
@@ -125,10 +125,16 @@ void CScene_01::Enter()
 
 	// 땅 물체 배치
 	CObject* pGround = new CGround;
-	pGround->SetName(L"Ground");
+	pGround->SetName(L"Ground1");
 	pGround->SetPos(Vec2(640.f, 584.f));
-	pGround->SetScale(Vec2(600.f, 60.f));
+	pGround->SetScale(Vec2(1500.f, 60.f));
 	AddObject(pGround, GROUP_TYPE::GROUND);
+
+	CObject* pUpGround = new CGround;
+	pUpGround->SetName(L"Ground2");
+	pUpGround->SetPos(Vec2(640.f, 300.f));
+	pUpGround->SetScale(Vec2(1500.f, 60.f));
+	AddObject(pUpGround, GROUP_TYPE::GROUND);
 
 	// 충돌 지정
 	// Player 그룹과 Monster 그룹 간의 충돌체크
