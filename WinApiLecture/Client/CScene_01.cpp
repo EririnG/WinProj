@@ -31,6 +31,7 @@ CScene_01::CScene_01()
 	, m_fForceRadius(500.f)
 	, m_fCurRadius(0.f)
 	, m_fForce(500.f)
+	, m_fTime(0.f)
 {
 }
 
@@ -75,6 +76,21 @@ void CScene_01::update()
 			}
 		}
 	}
+
+	m_fTime += fDT;
+	if (m_fTime >= 4)
+	{
+		srand(time(NULL));
+		int random = rand() % 2;
+		if (random == 1)
+		{
+			CMonster* pMon = CMonFactory::CreateMonster(MON_TYPE::NORMAL, Vec2(1280.f, 400.f));
+			AddObject(pMon, GROUP_TYPE::MONSTER);
+		}
+		m_fTime = 0.f;
+	}
+
+
 }
 
 void CScene_01::render(HDC _dc)
@@ -141,6 +157,7 @@ void CScene_01::Enter()
 	CCollisionMgr::GetInst()->CheckGroup(GROUP_TYPE::PLAYER, GROUP_TYPE::MONSTER);
 	CCollisionMgr::GetInst()->CheckGroup(GROUP_TYPE::MONSTER, GROUP_TYPE::PROJ_PLAYER);
 	CCollisionMgr::GetInst()->CheckGroup(GROUP_TYPE::PLAYER, GROUP_TYPE::GROUND);
+	CCollisionMgr::GetInst()->CheckGroup(GROUP_TYPE::MONSTER, GROUP_TYPE::GROUND);
 
 	// Camera Look ÁöÁ¤
 	CCamera::GetInst()->SetLookAt(vResolution / 2.f);

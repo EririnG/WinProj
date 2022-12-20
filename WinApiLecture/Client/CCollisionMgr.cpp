@@ -109,7 +109,7 @@ void CCollisionMgr::CollisionGroupUpdate(GROUP_TYPE _eLeft, GROUP_TYPE _eRight)
 					// 둘중 하나가 삭제 예정이라면, 충돌하지 않은것으로 취급.
 					if (!vecLeft[i]->IsDead() && !vecRight[j]->IsDead())
 					{
-						pLeftCol->OnCollisionEnter(pRighttCol);
+  						pLeftCol->OnCollisionEnter(pRighttCol);
 						pRighttCol->OnCollisionEnter(pLeftCol);
 						iter->second = true;
 					}

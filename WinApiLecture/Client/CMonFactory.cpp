@@ -28,15 +28,17 @@ CMonster* CMonFactory::CreateMonster(MON_TYPE _eType, Vec2 _vPos)
 		info.fSpeed = 150.f;
 
 		pMon->SetMonInfo(info);
+		pMon->SetName(L"Monster");
 		pMon->CreateRigidBody();
 		pMon->GetRigidBody()->SetMass(1.f);
+		pMon->CreateGravity();
 
-		AI* pAI = new AI;
-		pAI->AddState(new CIdleState);
-		pAI->AddState(new CTraceState);
-		pAI->SetCurState(MON_STATE::IDLE);
+		//AI* pAI = new AI;
+		//pAI->AddState(new CIdleState);
+		//pAI->AddState(new CTraceState);
+		//pAI->SetCurState(MON_STATE::IDLE);
 
-		pMon->SetAI(pAI);
+		//pMon->SetAI(pAI);
 	}
 		break;
 	case MON_TYPE::RANGE:

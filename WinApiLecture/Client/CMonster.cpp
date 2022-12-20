@@ -5,6 +5,7 @@
 #include "CCollider.h"
 #include "CRes.h"
 #include "AI.h"
+#include "CRigidBody.h"
 
 #include "CTimeMgr.h"
 #include "CSceneMgr.h"
@@ -21,6 +22,8 @@ CMonster::CMonster()
 	
 	CreateCollider();
 	GetCollider()->SetScale(Vec2(55.f, 55.f));
+
+
 }
 
 
@@ -48,11 +51,14 @@ void CMonster::CreateMissile()
 
 void CMonster::OnCollisionEnter(CCollider* _pOther)
 {
-	CObject* pOtherObj =_pOther->GetObj();
-	
-	if (pOtherObj->GetName() == L"Missile_Player")
+	CObject* pOtherObj = _pOther->GetObj();
+	if (L"Ground1" == _pOther->GetObj()->GetName() || L"Ground2" == _pOther->GetObj()->GetName())
 	{
-		
+		Vec2 vPos = GetPos();
+		if (vPos.y < pOtherObj->GetPos().y)
+		{
+			
+		}
 	}
 }
 
@@ -60,6 +66,9 @@ void CMonster::update()
 {
 	if(nullptr != m_pAI)
 		m_pAI->update();
+
+	CRigidBody* pRigid = GetRigidBody();
+	pRigid->AddForce(Vec2(-200.f, 0.f));
 }
 
 void CMonster::SetAI(AI* _AI)

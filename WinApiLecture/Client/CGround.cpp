@@ -24,7 +24,7 @@ void CGround::update()
 void CGround::OnCollisionEnter(CCollider* _pOther)
 {
 	CObject* pOtherObj = _pOther->GetObj();
-	if (pOtherObj->GetName() == L"Player")
+	if (pOtherObj->GetName() == L"Player"|| pOtherObj->GetName() == L"Monster")
 	{
 		pOtherObj->GetGravity()->SetGround(true);
 
@@ -44,12 +44,13 @@ void CGround::OnCollisionEnter(CCollider* _pOther)
 
 		pOtherObj->SetPos(vObjPos);
 	}
+
 }
 
 void CGround::OnCollision(CCollider* _pOther)
 {
 	CObject* pOtherObj = _pOther->GetObj();
-	if (pOtherObj->GetName() == L"Player")
+	if (pOtherObj->GetName() == L"Player" || pOtherObj->GetName() == L"Monster")
 	{
 		pOtherObj->GetGravity()->SetGround(true);
 
@@ -74,7 +75,7 @@ void CGround::OnCollision(CCollider* _pOther)
 void CGround::OnCollisionExit(CCollider* _pOther)
 {
 	CObject* pOtherObj = _pOther->GetObj();
-	if (pOtherObj->GetName() == L"Player")
+	if (pOtherObj->GetName() == L"Player" || pOtherObj->GetName() == L"Monster")
 	{
 		pOtherObj->GetGravity()->SetGround(false);
 	}

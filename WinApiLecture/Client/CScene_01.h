@@ -12,6 +12,7 @@ private:
 	float		m_fCurRadius;
 	float		m_fForce;
 	bool		m_bUseForce;
+	float		m_fTime;
 
 public:
 	virtual void update();
