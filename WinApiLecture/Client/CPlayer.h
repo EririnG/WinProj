@@ -33,6 +33,7 @@ private:
 	PLAYER_STATE		m_ePrevState;
 	int					m_iDir;
 	int					m_iPrevDir;
+	int					m_iHP;
 
 public:
 	virtual void update();

@@ -31,7 +31,7 @@ CMonster* CMonFactory::CreateMonster(MON_TYPE _eType, Vec2 _vPos)
 		pMon->SetName(L"Monster");
 		pMon->CreateRigidBody();
 		pMon->GetRigidBody()->SetMass(1.f);
-		pMon->CreateGravity();
+		//pMon->CreateGravity();
 
 		//AI* pAI = new AI;
 		//pAI->AddState(new CIdleState);

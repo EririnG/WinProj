@@ -55,7 +55,6 @@ void CEventMgr::Excute(const tEvent& _eve)
 
 		CSceneMgr::GetInst()->GetCurScene()->AddObject(pNewObj, eType);
 	}
-
 		break;
 	case EVENT_TYPE::DELETE_OBJECT:
 	{
@@ -85,6 +84,12 @@ void CEventMgr::Excute(const tEvent& _eve)
 		pAI->ChangeState(eNextState);
 	}
 		break;
+	case EVENT_TYPE::DEAD:
+	{
+		// lParam : AI
+		int MessageBox(HWND hwnd, LPCTSTR IpText, LPCTSTR IpCaption, UINT nType);
+	}
+	break;
 	}
 		
 }

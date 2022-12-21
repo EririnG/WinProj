@@ -7,6 +7,7 @@
 #include "CTimeMgr.h"
 #include "CPathMgr.h"
 #include "CResMgr.h"
+#include "CEventMgr.h"
 
 #include "CMissile.h"
 #include "CTexture.h"
@@ -24,6 +25,7 @@ CPlayer::CPlayer()
 	, m_ePrevState(PLAYER_STATE::WALK)
 	, m_iDir(1)
 	, m_iPrevDir(1)
+	, m_iHP(3)
 {
 	//_pTex = CResMgr::GetInst()->LoadTexture(L"PlayerTex", L"texture\\link_0.bmp");
 	
@@ -97,6 +99,11 @@ void CPlayer::update()
 	m_ePrevState = m_eCurState;
 	m_iPrevDir = m_iDir;
 	
+	if (0 == m_iHP)
+	{
+		
+	}
+
 }
 
 void CPlayer::render(HDC _dc)
@@ -161,7 +168,7 @@ void CPlayer::update_state()
 
 		if(GetRigidBody())
 		{
-			GetRigidBody()->SetVelocity(Vec2(GetRigidBody()->GetVelocity().x, -300.f));
+			GetRigidBody()->SetVelocity(Vec2(GetRigidBody()->GetVelocity().x, -400.f));
 		}
 		m_pSound = CResMgr::GetInst()->FindSound(L"Jump");
 		m_pSound->Play(false);

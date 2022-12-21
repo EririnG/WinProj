@@ -6,6 +6,7 @@
 #include "CRes.h"
 #include "AI.h"
 #include "CRigidBody.h"
+#include "CPlayer.h"
 
 #include "CTimeMgr.h"
 #include "CSceneMgr.h"
@@ -68,7 +69,29 @@ void CMonster::update()
 		m_pAI->update();
 
 	CRigidBody* pRigid = GetRigidBody();
-	pRigid->AddForce(Vec2(-200.f, 0.f));
+	pRigid->AddForce(Vec2(-400.f, 0.f));
+
+
+
+
+
+	// Player 의 위치 체크
+	CPlayer* pPlayer = (CPlayer*)CSceneMgr::GetInst()->GetCurScene()->GetPlayer();
+	Vec2 vPlayerPos = pPlayer->GetPos();
+
+	// 몬스터의 범위 안에 들어오면 추적 상태로 전환
+	CMonster* pMonster = this;
+	Vec2 vMonPos = pMonster->GetPos();
+
+	Vec2 vDiff = vPlayerPos - vMonPos;
+	float fLen = vDiff.Length();
+
+	if (fLen > 1280.f)
+	{
+ 		DeleteObject(this);
+	}
+
+
 }
 
 void CMonster::SetAI(AI* _AI)
